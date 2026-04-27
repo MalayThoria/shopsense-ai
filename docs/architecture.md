@@ -2,64 +2,167 @@
 
 ## System diagram
 
-```mermaid
-flowchart TD
-    subgraph CLIENT["Entry points"]
-        UI["Streamlit UI<br/>ui/app.py"]
-        BATCH["Batch script<br/>pipeline/orchestrator.py"]
-    end
+```
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                         SHOPSENSE AI — HOW IT WORKS                          ║
+║              From customer ticket to resolved/escalated reply                ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 
-    UI -->|ticket dict| ORCH
-    BATCH -->|ticket dict| ORCH
 
-    ORCH["Orchestrator<br/>process_ticket()"]
+  STEP 0:  A customer sends a message
+  ─────────────────────────────────────
 
-    subgraph P1["Phase 1 — Triage"]
-        T1["llama3.1 via Ollama<br/>JSON mode"]
-        T1OUT["intent / urgency /<br/>sentiment / entities /<br/>confidence"]
-        T1 --> T1OUT
-    end
+      "Hi, my order ORD-4892 hasn't arrived in 17 days!"
+                            │
+                            ▼
+                ┌───────────────────────┐
+                │   Streamlit UI   OR   │
+                │   Batch script        │
+                └───────────┬───────────┘
+                            │ ticket = {id, text, channel}
+                            ▼
+                ┌───────────────────────┐
+                │     ORCHESTRATOR      │     ← The "boss" that runs all 3 phases
+                │   process_ticket()    │       in order, one after another
+                └───────────┬───────────┘
+                            │
+                            ▼
 
-    subgraph P2["Phase 2 — RAG"]
-        Q["Build query<br/>= intent + raw_text"]
-        RET["Chroma retriever<br/>k=3, MiniLM-L6-v2"]
-        LLM2["ChatOllama<br/>RetrievalQA stuff chain"]
-        ANS["grounded_answer +<br/>retrieved_chunks"]
-        Q --> RET --> LLM2 --> ANS
-    end
+  ┌────────────────────────────────────────────────────────────────────────┐
+  │                                                                        │
+  │   PHASE 1 — UNDERSTAND THE TICKET                                      │
+  │   ────────────────────────────────                                     │
+  │                                                                        │
+  │   "What is the customer asking? How urgent? How angry?"                │
+  │                                                                        │
+  │     ┌────────────────────────────────────────────────────┐             │
+  │     │  llama3.1 (running locally via Ollama)            │             │
+  │     │  Reads the message and returns structured JSON:   │             │
+  │     │                                                    │             │
+  │     │     intent:     shipping_delay                     │             │
+  │     │     urgency:    high                               │             │
+  │     │     sentiment:  frustrated                         │             │
+  │     │     order_id:   ORD-4892                           │             │
+  │     │     days:       17                                 │             │
+  │     │     confidence: 0.95                               │             │
+  │     └────────────────────────────────────────────────────┘             │
+  │                                                                        │
+  └────────────────────────────────┬───────────────────────────────────────┘
+                                   │
+                                   ▼
 
-    subgraph P3["Phase 3 — Agentic Decision"]
-        TOOL["@tool order_lookup"]
-        API[("Flask Mock API<br/>:5050/api/orders/{id}")]
-        RULES["should_escalate()<br/>5 deterministic rules"]
-        REPLY["LLM reply drafter<br/>grounded in KB context"]
-        TOOL --> API
-        TOOL --> RULES
-        RULES --> REPLY
-    end
+  ┌────────────────────────────────────────────────────────────────────────┐
+  │                                                                        │
+  │   PHASE 2 — FIND THE RIGHT POLICY                                      │
+  │   ────────────────────────────────                                     │
+  │                                                                        │
+  │   "What does Stryde's policy say about this?"                          │
+  │                                                                        │
+  │                                                                        │
+  │   ┌──────────────────────┐         ┌────────────────────────────┐      │
+  │   │  KNOWLEDGE BASE      │         │   1. Build search query    │      │
+  │   │  (ChromaDB)          │         │      from intent + text    │      │
+  │   │                      │         │                            │      │
+  │   │  8 policy documents: │         │   2. Search ChromaDB       │      │
+  │   │  • Returns           │ ◄───────┤      → top 3 best chunks   │      │
+  │   │  • Refunds           │         │                            │      │
+  │   │  • Shipping          │         │   3. Send chunks + query   │      │
+  │   │  • Warranty          │         │      to llama3.1           │      │
+  │   │  • Payments          │         │                            │      │
+  │   │  • Loyalty           │         │   4. Get grounded answer   │      │
+  │   │  • Sizes             │         │      based ONLY on policy  │      │
+  │   │  • Escalations       │         └────────────┬───────────────┘      │
+  │   └──────────────────────┘                      │                      │
+  │                                                  │                      │
+  │   Output:  grounded_answer + which policy was used                     │
+  │                                                                        │
+  └────────────────────────────────┬───────────────────────────────────────┘
+                                   │
+                                   ▼
 
-    subgraph KB["Knowledge base"]
-        MD["8 markdown policies<br/>data/knowledge_base/"]
-        CHROMA[("ChromaDB<br/>chroma_db/")]
-        ING["build_vectorstore.py<br/>chunk=400, overlap=60"]
-        MD --> ING --> CHROMA
-        CHROMA -.persisted store.-> RET
-    end
+  ┌────────────────────────────────────────────────────────────────────────┐
+  │                                                                        │
+  │   PHASE 3 — DECIDE & REPLY                                             │
+  │   ─────────────────────────                                            │
+  │                                                                        │
+  │   "Look up the order, decide resolve vs escalate, write reply"         │
+  │                                                                        │
+  │                                                                        │
+  │   STEP 3A — LOOK UP THE ORDER                                          │
+  │   ───────────────────────────                                          │
+  │                                                                        │
+  │     order_id: ORD-4892                                                 │
+  │           │                                                            │
+  │           ▼                                                            │
+  │     ┌─────────────────────────┐                                        │
+  │     │  Flask API (port 5050)  │                                        │
+  │     │  Reads orders.json      │                                        │
+  │     │                         │                                        │
+  │     │  Returns:               │                                        │
+  │     │   status: in_transit    │                                        │
+  │     │   days: 17              │                                        │
+  │     └────────────┬────────────┘                                        │
+  │                  │                                                     │
+  │                  ▼                                                     │
+  │                                                                        │
+  │   STEP 3B — CHECK ESCALATION RULES (NOT decided by LLM!)               │
+  │   ───────────────────────────────────────────────────────              │
+  │                                                                        │
+  │     ┌─────────────────────────────────────────────────┐                │
+  │     │  IF any of these → ESCALATE to human agent:    │                │
+  │     │                                                 │                │
+  │     │   Rule 1: Order ID not found in system          │                │
+  │     │   Rule 2: Days since order > 14                 │ ← MATCHES!     │
+  │     │   Rule 3: Status is "lost_in_transit"           │   (17 days)    │
+  │     │   Rule 4: High urgency AND angry sentiment      │                │
+  │     │   Rule 5: Complaint with no order ID            │                │
+  │     │                                                 │                │
+  │     │  ELSE → RESOLVE automatically                   │                │
+  │     └─────────────────────────────────────────────────┘                │
+  │                                                                        │
+  │                                                                        │
+  │   STEP 3C — DRAFT A REPLY (LLM, grounded in Phase 2's policy)          │
+  │   ────────────────────────────────────────────────────────             │
+  │                                                                        │
+  │     "Dear customer, sorry for the delay on ORD-4892.                   │
+  │      Your case has been escalated to our senior team                   │
+  │      and someone will contact you within 2 hours..."                   │
+  │                                                                        │
+  └────────────────────────────────┬───────────────────────────────────────┘
+                                   │
+                                   ▼
 
-    subgraph DATA["Data"]
-        ORDERS[("orders.json")]
-        ORDERS --> API
-    end
+  FINAL OUTPUT — Resolution Packet
+  ─────────────────────────────────
 
-    ORCH --> P1 --> P2 --> P3 --> OUT
+       ┌──────────────────────────────────────┐
+       │  decision:           ESCALATE        │
+       │  escalation_reason:  17-day delay    │
+       │  order_data:         {…}             │
+       │  draft_reply:        "Dear..."       │
+       │  kb_source:          shipping.md     │
+       │  resolved:           false           │
+       └──────────────────────────────────────┘
+                       │
+                       ▼
+       Sent to:
+        • Streamlit UI (visualized for support agent)
+        • outputs/pipeline_results.json (for audit)
+        • logs/pipeline.log (for debugging)
 
-    OUT["Resolution packet<br/>{decision, escalation_reason,<br/>order_data, draft_reply,<br/>kb_context_used}"]
 
-    style P1 fill:#e7f0ff,stroke:#5b8def
-    style P2 fill:#eafaf1,stroke:#3aaa6c
-    style P3 fill:#fff4e5,stroke:#e89b3c
-    style KB fill:#f3eaff,stroke:#8b5cf6
-    style DATA fill:#fafafa,stroke:#999
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  THE BIG IDEA                                                                ║
+║  ─────────────────────────────────────────────────────────────────────────── ║
+║                                                                              ║
+║  Phase 1 = "What did they say?"     →  CLASSIFY the ticket                  ║
+║  Phase 2 = "What's our policy?"     →  RETRIEVE grounded knowledge          ║
+║  Phase 3 = "What should we do?"     →  DECIDE & DRAFT a reply               ║
+║                                                                              ║
+║  The LLM does the "soft" work: understanding, retrieving, writing.           ║
+║  The RULES do the "hard" work: deciding when a human must intervene.         ║
+║  This makes the system both intelligent AND auditable.                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
 ## Data flow per ticket
