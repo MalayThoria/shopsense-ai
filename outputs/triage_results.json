@@ -1,0 +1,352 @@
+[
+  {
+    "intent": "shipping_delay",
+    "urgency": "high",
+    "sentiment": "frustrated",
+    "entities": {
+      "order_id": "ORD-4892",
+      "days_mentioned": 17,
+      "product_name": null
+    },
+    "confidence": 0.95,
+    "ticket_id": "T001",
+    "customer_id": "C101",
+    "raw_text": "Hi, I placed an order ORD-4892 almost 17 days ago and it still hasn't arrived. The tracking hasn't updated in a week. This is really frustrating — I needed these sneakers for an event this weekend. Can someone please look into this urgently?"
+  },
+  {
+    "intent": "order_status",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "order_id": "ORD-5021",
+      "product_name": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.95,
+    "ticket_id": "T002",
+    "customer_id": "C102",
+    "raw_text": "Hey, just checking on my order ORD-5021. It says delivered but I want to confirm everything is good. Thanks!"
+  },
+  {
+    "intent": "cancellation",
+    "urgency": "high",
+    "sentiment": "frustrated",
+    "entities": {
+      "order_id": "ORD-6610",
+      "product_name": null,
+      "days_mentioned": 1
+    },
+    "confidence": 0.9,
+    "ticket_id": "T003",
+    "customer_id": "C103",
+    "raw_text": "I want to cancel my order ORD-6610. I placed it yesterday and I changed my mind about the colour. Please cancel it before it ships."
+  },
+  {
+    "intent": "return_request",
+    "urgency": "high",
+    "sentiment": "frustrated",
+    "entities": {
+      "order_id": "ORD-7741",
+      "product_name": null,
+      "days_mentioned": 14
+    },
+    "confidence": 0.98,
+    "ticket_id": "T004",
+    "customer_id": "C104",
+    "raw_text": "My order ORD-7741 has been stuck on 'in transit' for over two weeks and now the tracking says it might be lost. This is unacceptable! I paid ₹4500 for those shoes and I want either my shoes or a full refund immediately. I'm extremely disappointed with Stryde."
+  },
+  {
+    "intent": "order_status",
+    "urgency": "medium",
+    "sentiment": "neutral",
+    "entities": {
+      "order_id": "ORD-8832",
+      "product_name": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.9,
+    "ticket_id": "T005",
+    "customer_id": "C105",
+    "raw_text": "I received my order ORD-8832 but the shoes are the wrong size. I ordered UK 9 but received UK 7. I've already initiated a return through the app. How long will the replacement take?"
+  },
+  {
+    "intent": "order_status",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "order_id": "ORD-9901",
+      "product_name": null,
+      "days_mentioned": 3
+    },
+    "confidence": 0.9,
+    "ticket_id": "T006",
+    "customer_id": "C106",
+    "raw_text": "Can you tell me the status of order ORD-9901? I placed it a few days ago and I'm curious when it will arrive."
+  },
+  {
+    "intent": "product_question",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "product_name": "Stryde Runner Pro",
+      "days_mentioned": null,
+      "order_id": null
+    },
+    "confidence": 1.0,
+    "ticket_id": "T007",
+    "customer_id": "C107",
+    "raw_text": "I'm looking at the Stryde Runner Pro on your website. Does it come in wide fit? I have slightly wider feet and I'm between UK 10 and UK 11. What would you recommend?"
+  },
+  {
+    "intent": "refund_inquiry",
+    "urgency": "high",
+    "sentiment": "angry",
+    "entities": {
+      "order_id": "ORD-9999",
+      "product_name": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.95,
+    "ticket_id": "T008",
+    "customer_id": "C108",
+    "raw_text": "I WAS CHARGED TWICE FOR MY ORDER! I can see two transactions of ₹3299 on my credit card statement. This is absolutely ridiculous. Fix this NOW or I'm filing a chargeback. Order number is ORD-9999."
+  },
+  {
+    "intent": "product_question",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "product_name": "sneakers",
+      "days_mentioned": null,
+      "order_id": null
+    },
+    "confidence": 0.8,
+    "ticket_id": "T009",
+    "customer_id": "C109",
+    "raw_text": "Hi there, I'd like to know more about your return policy. If I buy sneakers and they don't fit, can I return them? Is there a time limit?"
+  },
+  {
+    "intent": "product_question",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "product_name": null,
+      "order_id": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.8,
+    "ticket_id": "T010",
+    "customer_id": "C110",
+    "raw_text": "What payment methods do you accept? I want to use UPI but also wondering if you have any EMI options for expensive orders."
+  },
+  {
+    "intent": "refund_inquiry",
+    "urgency": "high",
+    "sentiment": "frustrated",
+    "entities": {
+      "order_id": null,
+      "product_name": null,
+      "days_mentioned": 10
+    },
+    "confidence": 0.95,
+    "ticket_id": "T011",
+    "customer_id": "C111",
+    "raw_text": "I returned a pair of sneakers 10 days ago and still haven't received my refund. The return was picked up by Delhivery and I have the receipt. When will I get my money back? This is taking way too long."
+  },
+  {
+    "intent": "complaint",
+    "urgency": "high",
+    "sentiment": "angry",
+    "entities": {
+      "product_name": null,
+      "order_id": null,
+      "days_mentioned": 12
+    },
+    "confidence": 0.9,
+    "ticket_id": "T012",
+    "customer_id": "C112",
+    "raw_text": "Your shipping is terrible. I've ordered from you three times and every single time the delivery is late. 12 days for what you call '5-7 business days' delivery. I'm done with Stryde honestly."
+  },
+  {
+    "intent": "product_question",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "product_name": "Stryde Rewards program",
+      "order_id": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.8,
+    "ticket_id": "T013",
+    "customer_id": "C113",
+    "raw_text": "Hello, I was wondering about the Stryde Rewards program. How do I earn points and what can I redeem them for? Also do points expire?"
+  },
+  {
+    "intent": "return_request",
+    "urgency": "high",
+    "sentiment": "angry",
+    "entities": {
+      "product_name": "Stryde Urban Black sneakers",
+      "order_id": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.8,
+    "ticket_id": "T014",
+    "customer_id": "C114",
+    "raw_text": "I received the wrong item in my order. I ordered the Stryde Urban Black sneakers but got some white running shoes instead. I'm very annoyed because this was supposed to be a gift. I don't even have an order number handy right now."
+  },
+  {
+    "intent": "complaint",
+    "urgency": "high",
+    "sentiment": "frustrated",
+    "entities": {
+      "product_name": null,
+      "days_mentioned": 4,
+      "order_id": null
+    },
+    "confidence": 0.8,
+    "ticket_id": "T015",
+    "customer_id": "C115",
+    "raw_text": "Do your sneakers come with any warranty? I bought a pair 4 months ago and the sole is already separating from the upper. This shouldn't happen with a premium brand."
+  },
+  {
+    "intent": "product_question",
+    "urgency": "low",
+    "sentiment": "positive",
+    "entities": {
+      "product_name": "Stryde Flex collection",
+      "order_id": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.9,
+    "ticket_id": "T016",
+    "customer_id": "C116",
+    "raw_text": "Hi, just wanted to say I love the new Stryde Flex collection! The comfort is amazing. Keep up the great work team!"
+  },
+  {
+    "intent": "cancellation",
+    "urgency": "high",
+    "sentiment": "frustrated",
+    "entities": {
+      "order_id": null,
+      "product_name": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.9,
+    "ticket_id": "T017",
+    "customer_id": "C117",
+    "raw_text": "I need to cancel my order. I accidentally ordered two pairs instead of one. Please cancel the duplicate order as soon as possible."
+  },
+  {
+    "intent": "order_status",
+    "urgency": "high",
+    "sentiment": "neutral",
+    "entities": {
+      "product_name": "sneakers",
+      "days_mentioned": "this Friday",
+      "order_id": null
+    },
+    "confidence": 0.8,
+    "ticket_id": "T018",
+    "customer_id": "C118",
+    "raw_text": "How long does express shipping take? I need a pair of sneakers delivered to Mumbai by this Friday. Is that possible if I order today?"
+  },
+  {
+    "intent": "refund_inquiry",
+    "urgency": "high",
+    "sentiment": "frustrated",
+    "entities": {
+      "order_id": "ORD-4892",
+      "product_name": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.8,
+    "ticket_id": "T019",
+    "customer_id": "C119",
+    "raw_text": "I was charged ₹2999 twice on my UPI for order ORD-4892. One payment went through but the second one also got debited. Please refund the duplicate charge immediately."
+  },
+  {
+    "intent": "product_question",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "product_name": "Stryde Runner and Stryde Runner Pro",
+      "order_id": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.8,
+    "ticket_id": "T020",
+    "customer_id": "C120",
+    "raw_text": "What's the difference between the Stryde Runner and the Stryde Runner Pro? Is the Pro worth the extra ₹1500? I mainly use them for daily jogging."
+  },
+  {
+    "intent": "return_request",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "order_id": null,
+      "product_name": "hoodie",
+      "days_mentioned": 7
+    },
+    "confidence": 0.8,
+    "ticket_id": "T021",
+    "customer_id": "C121",
+    "raw_text": "I want to return a hoodie I bought last week. It's too large. Can I exchange it for a medium instead of getting a refund?"
+  },
+  {
+    "intent": "order_status",
+    "urgency": "high",
+    "sentiment": "frustrated",
+    "entities": {
+      "order_id": null,
+      "product_name": null,
+      "days_mentioned": 5
+    },
+    "confidence": 0.95,
+    "ticket_id": "T022",
+    "customer_id": "C122",
+    "raw_text": "My order has been showing 'processing' for 5 days now. When will it actually ship? I expected faster service from a premium brand."
+  },
+  {
+    "intent": "product_question",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "product_name": null,
+      "days_mentioned": null,
+      "order_id": null
+    },
+    "confidence": 0.8,
+    "ticket_id": "T023",
+    "customer_id": "C123",
+    "raw_text": "Could you help me understand your size chart? I usually wear US 10 in Nike. What would be the equivalent Stryde size in UK sizing?"
+  },
+  {
+    "intent": "refund_inquiry",
+    "urgency": "high",
+    "sentiment": "angry",
+    "entities": {
+      "days_mentioned": 21,
+      "order_id": null,
+      "product_name": null
+    },
+    "confidence": 0.9,
+    "ticket_id": "T024",
+    "customer_id": "C124",
+    "raw_text": "I'm so angry right now. I've been waiting for my refund for THREE WEEKS. Every time I contact support I get the same copy-paste response. This is the worst customer service I've ever experienced. I want to speak to a manager RIGHT NOW."
+  },
+  {
+    "intent": "product_question",
+    "urgency": "low",
+    "sentiment": "neutral",
+    "entities": {
+      "order_id": null,
+      "product_name": null,
+      "days_mentioned": null
+    },
+    "confidence": 0.95,
+    "ticket_id": "T025",
+    "customer_id": "C125",
+    "raw_text": "Hi, do you ship to Andaman and Nicobar Islands? I saw on the website that you deliver to all Indian pincodes but I want to confirm before ordering."
+  }
+]

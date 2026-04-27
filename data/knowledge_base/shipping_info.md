@@ -1,0 +1,11 @@
+# Stryde Shipping Information
+
+We are committed to getting your Stryde order to your doorstep as quickly and reliably as possible. Currently, we ship to all serviceable pincodes across India, covering metros, tier-2 cities, and most tier-3 locations. We are working on expanding to international shipping in the near future, but at this time, deliveries are limited to addresses within India.
+
+Our standard delivery option takes 5 to 7 business days from the date your order is confirmed and dispatched. This is our default shipping method, and it is available for all orders regardless of value. For customers who need their order sooner, we offer Express Delivery at an additional charge of ₹149, which delivers your order in 2 to 3 business days. Express delivery is available in select cities including Mumbai, Delhi NCR, Bangalore, Hyderabad, Chennai, Pune, and Kolkata.
+
+All orders above ₹999 qualify for free standard shipping. Orders below this threshold incur a flat shipping fee of ₹79. This applies to the cart total after discounts and before any express shipping surcharges.
+
+We work with trusted logistics partners including FedEx, BlueDart, Delhivery, and Ecom Express. Your carrier is assigned automatically based on your delivery pincode to ensure the fastest and most reliable delivery route. Once your order is dispatched, you will receive a confirmation email and SMS with your tracking number and a direct link to track your package on the carrier's website. You can also track your order in real time through the Stryde app under the "My Orders" section.
+
+Please note that business days exclude Sundays and public holidays. During peak sale periods such as Stryde Season Sales or festive collections, delivery times may be slightly longer due to high order volumes. We always recommend placing orders early during sale events to avoid delays. If your order has not arrived within the estimated delivery window, please reach out to our support team at support@stryde.in or through the in-app chat and we will investigate the delay immediately with our logistics partner.

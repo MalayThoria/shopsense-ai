@@ -1,0 +1,11 @@
+# Stryde Size Guide
+
+Finding the right fit is essential for comfort and performance, and at Stryde we want to help you pick the perfect size every time. Our sneakers are designed using Indian sizing standards, but we provide conversions for UK and EU sizing to make things easy for everyone.
+
+Here is how our sizes map across standards. A Stryde size 6 corresponds to UK 6 and EU 39. Size 7 maps to UK 7 and EU 40. Size 8 is UK 8 and EU 41. Size 9 is UK 9 and EU 42. Size 10 is UK 10 and EU 44. Size 11 is UK 11 and EU 45. Size 12 is UK 12 and EU 46. For customers familiar with US sizing, our sizes run approximately one size smaller than US standards, so a US 10 would typically be a Stryde UK 9.
+
+To measure your foot accurately at home, place a piece of paper on a hard floor against a wall. Stand on the paper with your heel touching the wall, and mark the point where your longest toe ends. Measure the distance in centimetres from the wall to the mark. A foot length of 25 cm corresponds to approximately UK 7, 26 cm to UK 8, 27 cm to UK 9, 28 cm to UK 10, and 29 cm to UK 11. We recommend measuring both feet, as it is common for one foot to be slightly larger — always go with the larger measurement.
+
+If you find yourself between two sizes, our recommendation depends on the type of sneaker you are purchasing. For running shoes like the Stryde Runner and Runner Pro, we suggest sizing up by half a size as your feet naturally swell during physical activity and you will want extra room in the toe box. For casual sneakers like the Stryde Urban and Flex lines, either size should work, but most customers prefer the snug fit of the smaller size. For formal sneakers and boots, we recommend staying true to your measured size for a clean, fitted look.
+
+Our different product lines have slightly varied fits. The Runner series features a wider toe box suited for extended wear and activity. The Urban line has a medium width standard fit that works for most foot shapes. The Classic Retro line tends to run slightly narrow due to its vintage-inspired silhouette. If you have particularly wide feet, we recommend the Runner or Flex series over the Classic or Urban lines.

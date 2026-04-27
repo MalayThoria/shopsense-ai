@@ -1,0 +1,68 @@
+[
+  {
+    "ticket_text": "Hi, I placed an order ORD-4892 almost 17 days ago and it still hasn't arrived. The tracking hasn't updated in a week. This is really frustrating — I needed these sneakers for an event this weekend. Can someone please look into this urgently?",
+    "query_used": "order_status Hi, I placed an order ORD-4892 almost 17 days ago and it still hasn't arrived. The tracking hasn't updated in a week. This is really frustrating — I needed these sneakers for an event this weekend. Can someone please look into this urgently?",
+    "retrieved_chunks": [
+      {
+        "source": "shipping_info.md",
+        "text": "to track your package on the carrier's website. You can also track your order in real time through the Stryde app under the \"My Orders\" section.",
+        "relevance_score": 0.85
+      },
+      {
+        "source": "returns_policy.md",
+        "text": "To be eligible for a return, items must be in their original condition — unworn, unwashed, and with all original tags attached. We ask that you return items in their original Stryde packaging, includi",
+        "relevance_score": 0.8
+      },
+      {
+        "source": "shipping_info.md",
+        "text": "delivery window, please reach out to our support team at support@stryde.in or through the in-app chat and we will investigate the delay immediately with our logistics partner.",
+        "relevance_score": 0.75
+      }
+    ],
+    "grounded_answer": "I'd be happy to help you with your issue.\n\nTo track the status of your order, I recommend checking the carrier's website or using the Stryde app under the \"My Orders\" section. If the tracking information is not updating, it's possible that there may be a delay in delivery.\n\nHowever, since your order has been placed almost 17 days ago and the tracking hasn't updated in a week, I would suggest reaching out to our support team at support@stryde.in or through the in-app chat. They will investigate the delay immediately with our logistics partner and try to provide you with an update on the expected delivery time.\n\nI hope this helps, and please let me know if there's anything else I can do to assist you."
+  },
+  {
+    "ticket_text": "I'm looking at the Stryde Runner Pro on your website. Does it come in wide fit? I have slightly wider feet and I'm between UK 10 and UK 11. What would you recommend?",
+    "query_used": "product_question I'm looking at the Stryde Runner Pro on your website. Does it come in wide fit? I have slightly wider feet and I'm between UK 10 and UK 11. What would you recommend?",
+    "retrieved_chunks": [
+      {
+        "source": "size_guide.md",
+        "text": "wide feet, we recommend the Runner or Flex series over the Classic or Urban lines.",
+        "relevance_score": 0.85
+      },
+      {
+        "source": "size_guide.md",
+        "text": "Our different product lines have slightly varied fits. The Runner series features a wider toe box suited for extended wear and activity. The Urban line has a medium width standard fit that works for m",
+        "relevance_score": 0.8
+      },
+      {
+        "source": "size_guide.md",
+        "text": "If you find yourself between two sizes, our recommendation depends on the type of sneaker you are purchasing. For running shoes like the Stryde Runner and Runner Pro, we suggest sizing up by half a si",
+        "relevance_score": 0.75
+      }
+    ],
+    "grounded_answer": "According to the context, yes, the Stryde Runner series does offer a wider toe box suited for extended wear and activity, which is perfect for people with wider feet.\n\nSince you're considering the Stryde Runner Pro, I'd recommend sizing up by half a size as your feet will swell during physical activity. However, since you mentioned you have slightly wider feet, it's likely that the standard UK 10 might not provide enough room in the toe box.\n\nConsidering this, I would suggest trying the UK 11 size to ensure a comfortable fit. If you're still unsure, you could also consider reaching out to their customer support for further guidance or advice on sizing."
+  },
+  {
+    "ticket_text": "I returned a pair of sneakers 10 days ago and still haven't received my refund. The return was picked up by Delhivery and I have the receipt. When will I get my money back? This is taking way too long.",
+    "query_used": "refund_inquiry I returned a pair of sneakers 10 days ago and still haven't received my refund. The return was picked up by Delhivery and I have the receipt. When will I get my money back? This is taking way too long.",
+    "retrieved_chunks": [
+      {
+        "source": "refund_process.md",
+        "text": "Once your returned item reaches our warehouse, our quality team inspects it within 24 hours to confirm that it meets our return conditions. After the inspection is complete and approved, the refund is",
+        "relevance_score": 0.85
+      },
+      {
+        "source": "returns_policy.md",
+        "text": "# Stryde Returns Policy\n\nAt Stryde, we want every customer to feel confident about their purchase. That is why we offer a generous 30-day return window from the date of delivery. If your sneakers, app",
+        "relevance_score": 0.8
+      },
+      {
+        "source": "refund_process.md",
+        "text": "All refunds are credited back to the original payment method used at the time of purchase. We are unable to process refunds to a different account, card, or payment method for security reasons. If the",
+        "relevance_score": 0.75
+      }
+    ],
+    "grounded_answer": "I don't know when you'll receive your refund, but according to Stryde's returns policy, after the inspection is complete and approved (which happens within 24 hours), the refund is initiated immediately. The time it takes for the refund to appear in your account depends on your original payment method. You may want to contact their support team to inquire about the status of your return and potential delays with your refund."
+  }
+]

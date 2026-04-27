@@ -1,0 +1,245 @@
+{
+  "ORD-4892": {
+    "customer_id": "C101",
+    "status": "in_transit",
+    "items": [
+      {"product": "Stryde Runner Pro", "size": "UK 9", "colour": "Midnight Black"}
+    ],
+    "order_date": "2026-04-10",
+    "estimated_delivery": "2026-04-17",
+    "days_since_order": 17,
+    "carrier": "BlueDart",
+    "tracking_number": "BD789456123"
+  },
+  "ORD-5021": {
+    "customer_id": "C102",
+    "status": "delivered",
+    "items": [
+      {"product": "Stryde Flex Casual", "size": "UK 8", "colour": "Cloud White"}
+    ],
+    "order_date": "2026-04-19",
+    "estimated_delivery": "2026-04-25",
+    "days_since_order": 8,
+    "carrier": "Delhivery",
+    "tracking_number": "DL1029384756"
+  },
+  "ORD-6610": {
+    "customer_id": "C103",
+    "status": "processing",
+    "items": [
+      {"product": "Stryde Urban Sneaker", "size": "UK 10", "colour": "Olive Green"}
+    ],
+    "order_date": "2026-04-25",
+    "estimated_delivery": "2026-05-01",
+    "days_since_order": 2,
+    "carrier": "FedEx",
+    "tracking_number": "FX440098321",
+    "cancellable": true
+  },
+  "ORD-7741": {
+    "customer_id": "C104",
+    "status": "lost_in_transit",
+    "items": [
+      {"product": "Stryde AirMax Trail", "size": "UK 11", "colour": "Forest Green"}
+    ],
+    "order_date": "2026-04-05",
+    "estimated_delivery": "2026-04-12",
+    "days_since_order": 22,
+    "carrier": "Ecom Express",
+    "tracking_number": "EE5567891234"
+  },
+  "ORD-8832": {
+    "customer_id": "C105",
+    "status": "return_initiated",
+    "items": [
+      {"product": "Stryde Classic Retro", "size": "UK 7", "colour": "Tan Brown"}
+    ],
+    "order_date": "2026-04-22",
+    "estimated_delivery": "2026-04-27",
+    "days_since_order": 5,
+    "carrier": "Delhivery",
+    "tracking_number": "DL7788990011"
+  },
+  "ORD-9901": {
+    "customer_id": "C106",
+    "status": "shipped",
+    "items": [
+      {"product": "Stryde Flex Casual", "size": "UK 9", "colour": "Navy Blue"}
+    ],
+    "order_date": "2026-04-23",
+    "estimated_delivery": "2026-04-29",
+    "days_since_order": 4,
+    "carrier": "FedEx",
+    "tracking_number": "FX882233445"
+  },
+  "ORD-1001": {
+    "customer_id": "C111",
+    "status": "delivered",
+    "items": [
+      {"product": "Stryde Runner", "size": "UK 8", "colour": "Crimson Red"}
+    ],
+    "order_date": "2026-04-15",
+    "estimated_delivery": "2026-04-21",
+    "days_since_order": 12,
+    "carrier": "BlueDart",
+    "tracking_number": "BD112233445"
+  },
+  "ORD-1002": {
+    "customer_id": "C112",
+    "status": "in_transit",
+    "items": [
+      {"product": "Stryde Urban Sneaker", "size": "UK 10", "colour": "Charcoal Grey"}
+    ],
+    "order_date": "2026-04-20",
+    "estimated_delivery": "2026-04-27",
+    "days_since_order": 7,
+    "carrier": "Delhivery",
+    "tracking_number": "DL9988776655"
+  },
+  "ORD-1003": {
+    "customer_id": "C113",
+    "status": "pending",
+    "items": [
+      {"product": "Stryde Flex Hoodie", "size": "L", "colour": "Heather Grey"}
+    ],
+    "order_date": "2026-04-26",
+    "estimated_delivery": "2026-05-02",
+    "days_since_order": 1,
+    "carrier": "FedEx",
+    "tracking_number": "FX556677889"
+  },
+  "ORD-1004": {
+    "customer_id": "C114",
+    "status": "delivered",
+    "items": [
+      {"product": "Stryde Urban Black", "size": "UK 9", "colour": "Black"}
+    ],
+    "order_date": "2026-04-14",
+    "estimated_delivery": "2026-04-20",
+    "days_since_order": 13,
+    "carrier": "Ecom Express",
+    "tracking_number": "EE1122334455"
+  },
+  "ORD-1005": {
+    "customer_id": "C115",
+    "status": "delivered",
+    "items": [
+      {"product": "Stryde AirMax Trail", "size": "UK 10", "colour": "Stone Grey"}
+    ],
+    "order_date": "2026-03-28",
+    "estimated_delivery": "2026-04-03",
+    "days_since_order": 30,
+    "carrier": "BlueDart",
+    "tracking_number": "BD998877665"
+  },
+  "ORD-1006": {
+    "customer_id": "C116",
+    "status": "delivered",
+    "items": [
+      {"product": "Stryde Flex Casual", "size": "UK 7", "colour": "Pastel Pink"}
+    ],
+    "order_date": "2026-04-18",
+    "estimated_delivery": "2026-04-24",
+    "days_since_order": 9,
+    "carrier": "Delhivery",
+    "tracking_number": "DL4455667788"
+  },
+  "ORD-1007": {
+    "customer_id": "C117",
+    "status": "processing",
+    "items": [
+      {"product": "Stryde Runner Pro", "size": "UK 8", "colour": "Electric Blue"},
+      {"product": "Stryde Runner Pro", "size": "UK 8", "colour": "Electric Blue"}
+    ],
+    "order_date": "2026-04-25",
+    "estimated_delivery": "2026-05-01",
+    "days_since_order": 2,
+    "carrier": "FedEx",
+    "tracking_number": "FX223344556",
+    "cancellable": true
+  },
+  "ORD-1008": {
+    "customer_id": "C118",
+    "status": "pending",
+    "items": [
+      {"product": "Stryde Classic Retro", "size": "UK 9", "colour": "Vintage White"}
+    ],
+    "order_date": "2026-04-27",
+    "estimated_delivery": "2026-05-03",
+    "days_since_order": 0,
+    "carrier": "BlueDart",
+    "tracking_number": "BD334455667"
+  },
+  "ORD-1009": {
+    "customer_id": "C119",
+    "status": "shipped",
+    "items": [
+      {"product": "Stryde Runner", "size": "UK 10", "colour": "Slate Blue"}
+    ],
+    "order_date": "2026-04-22",
+    "estimated_delivery": "2026-04-28",
+    "days_since_order": 5,
+    "carrier": "Ecom Express",
+    "tracking_number": "EE6677889900"
+  },
+  "ORD-1010": {
+    "customer_id": "C120",
+    "status": "delivered",
+    "items": [
+      {"product": "Stryde Runner", "size": "UK 9", "colour": "Shadow Black"}
+    ],
+    "order_date": "2026-04-16",
+    "estimated_delivery": "2026-04-22",
+    "days_since_order": 11,
+    "carrier": "Delhivery",
+    "tracking_number": "DL5544332211"
+  },
+  "ORD-1011": {
+    "customer_id": "C121",
+    "status": "delivered",
+    "items": [
+      {"product": "Stryde Flex Hoodie", "size": "XL", "colour": "Charcoal Black"}
+    ],
+    "order_date": "2026-04-20",
+    "estimated_delivery": "2026-04-26",
+    "days_since_order": 7,
+    "carrier": "FedEx",
+    "tracking_number": "FX667788990"
+  },
+  "ORD-1012": {
+    "customer_id": "C122",
+    "status": "processing",
+    "items": [
+      {"product": "Stryde Urban Sneaker", "size": "UK 8", "colour": "Desert Sand"}
+    ],
+    "order_date": "2026-04-22",
+    "estimated_delivery": "2026-04-28",
+    "days_since_order": 5,
+    "carrier": "BlueDart",
+    "tracking_number": "BD778899001"
+  },
+  "ORD-1013": {
+    "customer_id": "C123",
+    "status": "cancelled",
+    "items": [
+      {"product": "Stryde Classic Retro", "size": "UK 10", "colour": "Cream"}
+    ],
+    "order_date": "2026-04-19",
+    "estimated_delivery": "2026-04-25",
+    "days_since_order": 8,
+    "carrier": "Delhivery",
+    "tracking_number": "DL8899001122"
+  },
+  "ORD-1014": {
+    "customer_id": "C124",
+    "status": "in_transit",
+    "items": [
+      {"product": "Stryde AirMax Trail", "size": "UK 11", "colour": "Rust Orange"}
+    ],
+    "order_date": "2026-04-12",
+    "estimated_delivery": "2026-04-18",
+    "days_since_order": 15,
+    "carrier": "Ecom Express",
+    "tracking_number": "EE9900112233"
+  }
+}

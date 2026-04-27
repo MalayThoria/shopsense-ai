@@ -1,0 +1,13 @@
+# Stryde Escalation Contacts and Process
+
+At Stryde, we aim to resolve every customer issue at the first point of contact. However, we understand that some situations require senior attention, and we have a clear escalation process to ensure no customer concern goes unaddressed.
+
+When a support ticket is flagged as high priority — typically involving lost orders, repeated failed deliveries, billing disputes, or situations where a customer has been waiting beyond our standard service level agreements — it is automatically routed to our Senior Support Team. This escalation happens within the system without the customer needing to take any additional steps. Our goal is to have a senior support specialist reach out to the customer within 2 hours of escalation during business hours, which are Monday through Saturday from 9 AM to 8 PM IST. Escalations raised outside business hours are addressed first thing the following business day.
+
+For customers who prefer to reach our senior team directly, you can email escalations@stryde.in with your order number, a summary of the issue, and any previous ticket or reference numbers from earlier interactions. Including this information helps us pick up right where the previous conversation left off, without asking you to repeat yourself. Our senior support email has a guaranteed response time of 4 hours during business hours.
+
+Chat-based escalations work slightly differently. If you are communicating through our website or app chat and the issue cannot be resolved by the initial support agent, the chat is flagged automatically in our system. A senior agent will either join the existing chat session or follow up with you via email or phone within 2 hours.
+
+To help us resolve your issue as quickly as possible, please have the following information ready when contacting our escalation team — your order number, the email address or phone number associated with your Stryde account, a brief description of the issue along with any photos if applicable, and details of any previous interactions with our support team including ticket numbers.
+
+Our escalation service level agreement is straightforward. High-priority issues such as lost packages, incorrect billing, and safety concerns receive a response within 2 hours. Medium-priority escalations including delayed refunds and shipping complaints are addressed within 6 hours. Standard escalations for general dissatisfaction or policy clarification are responded to within 12 hours. All escalation SLAs are measured during business hours only.
