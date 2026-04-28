@@ -29,12 +29,12 @@
           "relevance_score": 0.8
         },
         {
-          "source": "shipping_info.md",
-          "text": "delivery window, please reach out to our support team at support@stryde.in or through the in-app chat and we will investigate the delay immediately with our logistics partner.",
+          "source": "escalation_contacts.md",
+          "text": "To help us resolve your issue as quickly as possible, please have the following information ready when contacting our escalation team — your order number, the email address or phone number associated ",
           "relevance_score": 0.75
         }
       ],
-      "grounded_answer": "I'd be happy to help you with your issue.\n\nTo track the status of your order, I recommend checking the carrier's website or using the Stryde app under the \"My Orders\" section. If the tracking information is not updating, it's possible that there may be a delay in delivery.\n\nHowever, since your order has been placed almost 17 days ago and the tracking hasn't updated in a week, I would suggest reaching out to our support team at support@stryde.in or through the in-app chat. They will investigate the delay immediately with our logistics partner and try to provide you with an update on the expected delivery time.\n\nI hope this helps, and please let me know if there's anything else I can do to assist you."
+      "grounded_answer": "I'd be happy to help you with your issue.\n\nTo track the status of your order, you can try checking the carrier's website or using the Stryde app under the \"My Orders\" section. However, since the tracking hasn't updated in a week, it's possible that there may be an issue with the delivery.\n\nI recommend reaching out to our escalation team so we can assist you further. Please have your order number (ORD-4892), email address or phone number associated with your Stryde account, and any relevant photos ready when contacting us. We'll do our best to resolve this issue as quickly as possible and get your sneakers delivered to you in time for the event.\n\nPlease let me know if there's anything else I can assist you with."
     },
     "outcome": {
       "ticket_id": "T001",
@@ -57,7 +57,7 @@
         "status": "in_transit",
         "tracking_number": "BD789456123"
       },
-      "draft_reply": "Dear [Customer's Name],\n\nI want to start by apologizing for the frustration and inconvenience you're experiencing with your order ORD-4892. I understand how disappointing it must be that your Stryde Runner Pro sneakers haven't arrived yet, especially since you needed them for an event this weekend. Your case has been escalated to a senior support specialist who will reach out to you within the next 2 hours to investigate and provide a resolution. They'll work closely with our logistics partner to get an update on the expected delivery time.\n\nBest regards,\n[Your Name]\nStryde Customer Support",
+      "draft_reply": "Dear C101, I apologize for the delay in receiving your order ORD-4892. I understand how frustrating this must be, especially with an event coming up soon. Our records show that your order is still in transit with BlueDart and is expected to arrive by April 17th. However, since it's past our 14-day SLA, we're escalating your case to a senior agent who will contact you within the next 2 hours to assist further. They'll work closely with you to resolve this issue as quickly as possible and get your Stryde Runner Pro sneakers delivered in time for your event. Thank you for your patience and understanding.",
       "kb_context_used": "shipping_info.md",
       "resolved": false
     }
@@ -72,7 +72,7 @@
         "product_name": null,
         "days_mentioned": null
       },
-      "confidence": 0.9,
+      "confidence": 0.95,
       "ticket_id": "T002",
       "customer_id": "C102",
       "raw_text": "Hey, just checking on my order ORD-5021. It says delivered but I want to confirm everything is good. Thanks!"
@@ -93,11 +93,11 @@
         },
         {
           "source": "shipping_info.md",
-          "text": "to track your package on the carrier's website. You can also track your order in real time through the Stryde app under the \"My Orders\" section.",
+          "text": "Our standard delivery option takes 5 to 7 business days from the date your order is confirmed and dispatched. This is our default shipping method, and it is available for all orders regardless of valu",
           "relevance_score": 0.75
         }
       ],
-      "grounded_answer": "You can check the status of your order by tracking it in real-time through the Stryde app under the \"My Orders\" section. You should also be able to see a confirmation email and SMS with your tracking number, which includes a direct link to track your package on the carrier's website."
+      "grounded_answer": "Since it says \"delivered\", it's likely that your order has been successfully delivered to your address. However, if you're still unsure or have concerns, you can track the status of your return through the app at any time. You may also want to check with the carrier (assigned based on your delivery pincode) for more information about the delivery process."
     },
     "outcome": {
       "ticket_id": "T002",
@@ -120,7 +120,7 @@
         "status": "delivered",
         "tracking_number": "DL1029384756"
       },
-      "draft_reply": "Hi there, thank you for reaching out to us about your order ORD-5021! I'm happy to help you confirm everything is good. You can easily track the status of your package through our app under \"My Orders\" or by clicking on the tracking link in the confirmation email and SMS we sent you with your tracking number DL1029384756. Since your order was marked as delivered 8 days ago, it's likely that your Stryde Flex Casual sneakers have already been delivered to your doorstep - if you've checked your home and can't find them, please let me know and I'll be happy to assist further!",
+      "draft_reply": "\"Hi there, C102! Thank you for reaching out about your order ORD-5021. I've checked on its status, and it indeed shows as 'delivered'. Since it's been 8 days since the order was placed, it's likely that your Stryde Flex Casual in Cloud White has been successfully delivered to your address. If you're still unsure or have concerns, please don't hesitate to reach out, and I'll be happy to assist further.\"",
       "kb_context_used": "returns_policy.md",
       "resolved": true
     }
@@ -129,7 +129,7 @@
     "triage": {
       "intent": "cancellation",
       "urgency": "high",
-      "sentiment": "neutral",
+      "sentiment": "frustrated",
       "entities": {
         "order_id": "ORD-6610",
         "product_name": null,
@@ -150,17 +150,17 @@
           "relevance_score": 0.85
         },
         {
-          "source": "escalation_contacts.md",
-          "text": "To help us resolve your issue as quickly as possible, please have the following information ready when contacting our escalation team — your order number, the email address or phone number associated ",
+          "source": "refund_process.md",
+          "text": "All refunds are credited back to the original payment method used at the time of purchase. We are unable to process refunds to a different account, card, or payment method for security reasons. If the",
           "relevance_score": 0.8
         },
         {
-          "source": "refund_process.md",
-          "text": "All refunds are credited back to the original payment method used at the time of purchase. We are unable to process refunds to a different account, card, or payment method for security reasons. If the",
+          "source": "payment_methods.md",
+          "text": "Cash on Delivery is available for orders valued at ₹3000 or below. For security and fraud prevention purposes, we do not offer COD on higher-value orders. COD orders require a nominal convenience fee ",
           "relevance_score": 0.75
         }
       ],
-      "grounded_answer": "You can reach out to Stryde's support team at support@stryde.in or through the in-app chat, and they will investigate your request to cancel the order immediately with their logistics partner. Be sure to have your order number (ORD-6610) and a brief description of the issue ready when contacting them."
+      "grounded_answer": "I don't have access to your order information or the ability to directly interact with Stryde's support team. However, according to the provided context, you can reach out to their support team at support@stryde.in or through the in-app chat and they will investigate the delay immediately with their logistics partner."
     },
     "outcome": {
       "ticket_id": "T003",
@@ -184,29 +184,29 @@
         "status": "processing",
         "tracking_number": "FX440098321"
       },
-      "draft_reply": "Dear [Customer's Name],\n\nThank you for reaching out to us about cancelling your order ORD-6610. We understand that you've changed your mind about the colour and would like to cancel it before it ships. Since your order is still in the processing stage, we're happy to assist with a cancellation. Please note that our logistics partner will be notified of this change, and we'll ensure that no further action is taken on your order.\n\nBest regards,\nStryde Customer Support",
+      "draft_reply": "Dear C103, thank you for reaching out to us about cancelling your order ORD-6610. I've checked on the status of your order and it's currently in the processing stage. Unfortunately, since it's been only two days since you placed the order, we can't cancel it at this time as per our standard cancellation policy. However, I'd be happy to help you with a return or exchange once the order is delivered. Please let me know if there's anything else I can assist you with.\n\n(Note: I've kept the response polite and informative, while also clearly communicating the limitations of cancelling an order at this stage.)",
       "kb_context_used": "shipping_info.md",
       "resolved": true
     }
   },
   {
     "triage": {
-      "intent": "refund_inquiry",
+      "intent": "complaint",
       "urgency": "high",
-      "sentiment": "frustrated",
+      "sentiment": "angry",
       "entities": {
         "order_id": "ORD-7741",
         "product_name": null,
         "days_mentioned": 14
       },
-      "confidence": 0.85,
+      "confidence": 0.95,
       "ticket_id": "T004",
       "customer_id": "C104",
       "raw_text": "My order ORD-7741 has been stuck on 'in transit' for over two weeks and now the tracking says it might be lost. This is unacceptable! I paid ₹4500 for those shoes and I want either my shoes or a full refund immediately. I'm extremely disappointed with Stryde."
     },
     "rag": {
       "ticket_id": "T004",
-      "query_used": "refund_inquiry My order ORD-7741 has been stuck on 'in transit' for over two weeks and now the tracking says it might be lost. This is unacceptable! I paid ₹4500 for those shoes and I want either my shoes or a full refund immediately. I'm extremely disappointed with Stryde.",
+      "query_used": "complaint My order ORD-7741 has been stuck on 'in transit' for over two weeks and now the tracking says it might be lost. This is unacceptable! I paid ₹4500 for those shoes and I want either my shoes or a full refund immediately. I'm extremely disappointed with Stryde.",
       "retrieved_chunks": [
         {
           "source": "returns_policy.md",
@@ -214,22 +214,22 @@
           "relevance_score": 0.85
         },
         {
-          "source": "returns_policy.md",
-          "text": "# Stryde Returns Policy\n\nAt Stryde, we want every customer to feel confident about their purchase. That is why we offer a generous 30-day return window from the date of delivery. If your sneakers, app",
+          "source": "escalation_contacts.md",
+          "text": "To help us resolve your issue as quickly as possible, please have the following information ready when contacting our escalation team — your order number, the email address or phone number associated ",
           "relevance_score": 0.8
         },
         {
-          "source": "refund_process.md",
-          "text": "Partial refunds may apply in cases where the returned item shows signs of use, missing tags, or is returned without original packaging. You will be notified of any deductions before the refund is fina",
+          "source": "shipping_info.md",
+          "text": "to track your package on the carrier's website. You can also track your order in real time through the Stryde app under the \"My Orders\" section.",
           "relevance_score": 0.75
         }
       ],
-      "grounded_answer": "Dear Refund Inquiry,\n\nWe apologize for the inconvenience you've experienced with your order, ORD-7741. We understand that being unable to track your package is frustrating, especially when it's been over two weeks.\n\nHowever, we would like to inform you that our returns policy does not cover lost packages due to reasons beyond our control. In such cases, we can only offer a refund or replacement once the issue has been resolved with the courier service.\n\nWe are willing to assist you in resolving this matter and will initiate an investigation with the courier service. If your package is indeed lost, we will process a full refund for your order as soon as possible.\n\nPlease allow us some time to look into this further and we will be in touch with an update within 48 hours. You can also track the status of your refund through our app or by writing to refunds@stryde.in.\n\nWe appreciate your patience and understanding in this matter.\n\nBest regards,\nStryde Customer Service"
+      "grounded_answer": "Dear valued customer,\n\nThank you for reaching out to us about your concerns regarding your order ORD-7741. We apologize for the inconvenience caused by the delay in delivery and the uncertainty surrounding the status of your package.\n\nWe understand that being stuck on 'in transit' for over two weeks is unacceptable, and we're truly sorry for any distress this has caused you. We want to assure you that we're taking immediate action to resolve this issue as quickly as possible.\n\nTo better assist you, could you please provide us with the following information:\n\n*   A brief description of your order (ORD-7741) including the items and their quantities\n*   The email address or phone number associated with your Stryde account\n*   Any previous interactions with our support team regarding this issue\n\nWe'll do our best to locate your package and provide a resolution. If it's been lost, we'll process a full refund for the order amount of ₹4500.\n\nPlease allow us some time to investigate further and get back to you with an update on the status of your order. We appreciate your patience and understanding in this matter.\n\nIf you have any questions or concerns, please don't hesitate to reach out to our escalation team at [insert contact information]. We're here to help and want to ensure that you receive a satisfactory resolution.\n\nThank you for choosing Stryde, and we look forward to resolving this issue for you soon."
     },
     "outcome": {
       "ticket_id": "T004",
       "decision": "escalate",
-      "escalation_reason": "Order delayed 22 days, past 14-day SLA",
+      "escalation_reason": "Order marked as lost in transit",
       "order_data": {
         "carrier": "Ecom Express",
         "customer_id": "C104",
@@ -247,7 +247,7 @@
         "status": "lost_in_transit",
         "tracking_number": "EE5567891234"
       },
-      "draft_reply": "Dear [Customer's Name],\n\nI'm so sorry to hear that your order ORD-7741 has been stuck on 'in transit' for over two weeks and is now showing as potentially lost. I can only imagine how frustrating this must be, especially considering you paid ₹4500 for the shoes. Your case has been escalated to a senior support specialist who will reach out to you within the next 2 hours to personally assist with resolving this issue.\n\nBest regards,\nStryde Customer Support",
+      "draft_reply": "Dear valued customer C104,\n\nThank you for reaching out to us about your concerns regarding your order ORD-7741. We apologize for the inconvenience caused by the delay in delivery and the uncertainty surrounding the status of your package. We understand that being stuck on 'in transit' for over two weeks is unacceptable, and we're truly sorry for any distress this has caused you.\n\nWe want to assure you that we're taking immediate action to resolve this issue as quickly as possible. Our team has located your order details, which show that the items are still in transit with Ecom Express. We'll do our best to locate your package and provide a resolution. If it's been lost, we'll process a full refund for the order amount of ₹4500.\n\nPlease allow us some time to investigate further and get back to you with an update on the status of your order. We appreciate your patience and understanding in this matter. Your case has also been escalated to our senior team who will contact you within 2 hours to provide a more detailed update.\n\nThank you for choosing Stryde, and we look forward to resolving this issue for you soon.",
       "kb_context_used": "returns_policy.md",
       "resolved": false
     }
@@ -255,8 +255,8 @@
   {
     "triage": {
       "intent": "order_status",
-      "urgency": "low",
-      "sentiment": "neutral",
+      "urgency": "medium",
+      "sentiment": "frustrated",
       "entities": {
         "order_id": "ORD-8832",
         "product_name": null,
@@ -278,16 +278,16 @@
         },
         {
           "source": "size_guide.md",
-          "text": "Here is how our sizes map across standards. A Stryde size 6 corresponds to UK 6 and EU 39. Size 7 maps to UK 7 and EU 40. Size 8 is UK 8 and EU 41. Size 9 is UK 9 and EU 42. Size 10 is UK 10 and EU 44",
+          "text": "to UK 9, 28 cm to UK 10, and 29 cm to UK 11. We recommend measuring both feet, as it is common for one foot to be slightly larger — always go with the larger measurement.",
           "relevance_score": 0.8
         },
         {
-          "source": "size_guide.md",
-          "text": "to UK 9, 28 cm to UK 10, and 29 cm to UK 11. We recommend measuring both feet, as it is common for one foot to be slightly larger — always go with the larger measurement.",
+          "source": "product_warranty.md",
+          "text": "To file a warranty claim, email warranty@stryde.in with your order number, date of purchase, and clear photographs showing the defect from multiple angles. Our warranty team will review your claim wit",
           "relevance_score": 0.75
         }
       ],
-      "grounded_answer": "I don't have information about how long it takes to process returns and replacements, so I don't know when you can expect your replacement order to arrive."
+      "grounded_answer": "According to the warranty process, if your claim is approved (which it should be in this case since you're returning due to an incorrect order), they'll dispatch the replacement within 5 business days of approving the claim. However, I don't see any information on how long it takes for a return to be processed and replaced with a new item. It's best to contact their customer support directly for more specific information on this process."
     },
     "outcome": {
       "ticket_id": "T005",
@@ -310,8 +310,980 @@
         "status": "return_initiated",
         "tracking_number": "DL7788990011"
       },
-      "draft_reply": "Dear C105,\n\nThank you for reaching out to us about the sizing issue with your Stryde Classic Retro order (ORD-8832). I'm so sorry that we sent you a size UK 7 instead of the UK 9 you ordered. Since you've already initiated the return through our app, I recommend checking your email for updates on the status of your return and replacement orders. Unfortunately, I don't have information on the processing time for returns and replacements, but I can assure you that we'll do our best to get a replacement pair out to you as soon as possible.\n\nBest regards,\nStryde Customer Support",
+      "draft_reply": "Dear C105, thank you for reaching out to us regarding your order ORD-8832. I apologize for the inconvenience caused by receiving the wrong size shoes. Since you've already initiated a return through our app, we'll process it as soon as possible. According to our records, the replacement will be dispatched within 5 business days of approving your claim. You can expect delivery on or before April 27th, as per our estimated delivery date. If you have any further questions or concerns, please don't hesitate to reach out to us. We appreciate your patience and understanding in this matter.",
       "kb_context_used": "returns_policy.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "order_status",
+      "urgency": "low",
+      "sentiment": "neutral",
+      "entities": {
+        "order_id": "ORD-9901",
+        "product_name": null,
+        "days_mentioned": 3
+      },
+      "confidence": 0.95,
+      "ticket_id": "T006",
+      "customer_id": "C106",
+      "raw_text": "Can you tell me the status of order ORD-9901? I placed it a few days ago and I'm curious when it will arrive."
+    },
+    "rag": {
+      "ticket_id": "T006",
+      "query_used": "order_status Can you tell me the status of order ORD-9901? I placed it a few days ago and I'm curious when it will arrive.",
+      "retrieved_chunks": [
+        {
+          "source": "shipping_info.md",
+          "text": "to track your package on the carrier's website. You can also track your order in real time through the Stryde app under the \"My Orders\" section.",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "delivery window, please reach out to our support team at support@stryde.in or through the in-app chat and we will investigate the delay immediately with our logistics partner.",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "Our standard delivery option takes 5 to 7 business days from the date your order is confirmed and dispatched. This is our default shipping method, and it is available for all orders regardless of valu",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "You can track the status of your order by visiting the carrier's website or through the Stryde app under the \"My Orders\" section. If you're unable to find the information there, please reach out to our support team at support@stryde.in or through the in-app chat and we'll investigate the status with our logistics partner immediately."
+    },
+    "outcome": {
+      "ticket_id": "T006",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": {
+        "carrier": "FedEx",
+        "customer_id": "C106",
+        "days_since_order": 4,
+        "estimated_delivery": "2026-04-29",
+        "items": [
+          {
+            "colour": "Navy Blue",
+            "product": "Stryde Flex Casual",
+            "size": "UK 9"
+          }
+        ],
+        "order_date": "2026-04-23",
+        "order_id": "ORD-9901",
+        "status": "shipped",
+        "tracking_number": "FX882233445"
+      },
+      "draft_reply": "\"Hello C106, thank you for reaching out about your order ORD-9901. I'm happy to inform you that it has been shipped and is on its way to you! According to our records, the estimated delivery date is April 29th. You can also track the status of your package by visiting the FedEx website or through the Stryde app under the 'My Orders' section. If you have any further questions or concerns, please don't hesitate to reach out.\"",
+      "kb_context_used": "shipping_info.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "product_question",
+      "urgency": "low",
+      "sentiment": "neutral",
+      "entities": {
+        "product_name": "Stryde Runner Pro",
+        "days_mentioned": null,
+        "order_id": null
+      },
+      "confidence": 0.95,
+      "ticket_id": "T007",
+      "customer_id": "C107",
+      "raw_text": "I'm looking at the Stryde Runner Pro on your website. Does it come in wide fit? I have slightly wider feet and I'm between UK 10 and UK 11. What would you recommend?"
+    },
+    "rag": {
+      "ticket_id": "T007",
+      "query_used": "product_question I'm looking at the Stryde Runner Pro on your website. Does it come in wide fit? I have slightly wider feet and I'm between UK 10 and UK 11. What would you recommend?",
+      "retrieved_chunks": [
+        {
+          "source": "size_guide.md",
+          "text": "wide feet, we recommend the Runner or Flex series over the Classic or Urban lines.",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "size_guide.md",
+          "text": "# Stryde Size Guide\n\nFinding the right fit is essential for comfort and performance, and at Stryde we want to help you pick the perfect size every time. Our sneakers are designed using Indian sizing s",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "size_guide.md",
+          "text": "to UK 9, 28 cm to UK 10, and 29 cm to UK 11. We recommend measuring both feet, as it is common for one foot to be slightly larger — always go with the larger measurement.",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "According to the size guide, if you have wide feet, they recommend the Runner or Flex series over the Classic or Urban lines. However, since the Runner Pro is part of the Runner line, it's likely that it does come in a wide fit.\n\nSince you're between UK 10 and UK 11, I would recommend checking the size chart for the Runner Pro specifically to see if there are any options available in your size range. If not, you may want to consider sizing up to a UK 11 or even looking into the Flex series as an alternative option."
+    },
+    "outcome": {
+      "ticket_id": "T007",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Hi C107,\n\nThank you for reaching out to us about the Stryde Runner Pro! I'd be happy to help with your sizing question. According to our size guide, if you have wider feet, we recommend checking the Runner or Flex series, which both offer a more spacious fit. For the Runner Pro specifically, I would suggest checking the size chart on our website to see if there are any options available in your UK 10-11 range.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "size_guide.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "billing_dispute",
+      "urgency": "high",
+      "sentiment": "angry",
+      "entities": {
+        "order_id": "ORD-9999",
+        "product_name": null,
+        "days_mentioned": null
+      },
+      "confidence": 0.95,
+      "ticket_id": "T008",
+      "customer_id": "C108",
+      "raw_text": "I WAS CHARGED TWICE FOR MY ORDER! I can see two transactions of ₹3299 on my credit card statement. This is absolutely ridiculous. Fix this NOW or I'm filing a chargeback. Order number is ORD-9999."
+    },
+    "rag": {
+      "ticket_id": "T008",
+      "query_used": "billing_dispute I WAS CHARGED TWICE FOR MY ORDER! I can see two transactions of ₹3299 on my credit card statement. This is absolutely ridiculous. Fix this NOW or I'm filing a chargeback. Order number is ORD-9999.",
+      "retrieved_chunks": [
+        {
+          "source": "refund_process.md",
+          "text": "All refunds are credited back to the original payment method used at the time of purchase. We are unable to process refunds to a different account, card, or payment method for security reasons. If the",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "All orders above ₹999 qualify for free standard shipping. Orders below this threshold incur a flat shipping fee of ₹79. This applies to the cart total after discounts and before any express shipping s",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "escalation_contacts.md",
+          "text": "To help us resolve your issue as quickly as possible, please have the following information ready when contacting our escalation team — your order number, the email address or phone number associated ",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "I'd be happy to help you with the billing dispute.\n\nHowever, before we proceed, I want to clarify that our policy states that all refunds are credited back to the original payment method used at the time of purchase. In this case, since there was an error and you were charged twice, we will process a refund for the duplicate charge.\n\nTo resolve this issue as quickly as possible, please confirm the following:\n\n* You have checked your order details (ORD-9999) and confirmed that only one item was purchased.\n* The two transactions of ₹3299 are indeed on your credit card statement.\n\nOnce I verify these details, I will work with our support team to process a refund for the duplicate charge."
+    },
+    "outcome": {
+      "ticket_id": "T008",
+      "decision": "escalate",
+      "escalation_reason": "Order ID not found in system",
+      "order_data": null,
+      "draft_reply": "Dear C108,\n\nI appreciate you reaching out about the duplicate charge on your credit card statement. Unfortunately, we were unable to look up the details of your order ORD-9999 using our system. However, a senior agent will be in touch with you within 2 hours to discuss this further and work towards resolving the issue.\n\nThank you for your patience and understanding. If you have any other questions or concerns, please don't hesitate to reach out.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "refund_process.md",
+      "resolved": false
+    }
+  },
+  {
+    "triage": {
+      "intent": "product_question",
+      "urgency": "low",
+      "sentiment": "neutral",
+      "entities": {
+        "order_id": null,
+        "product_name": "sneakers",
+        "days_mentioned": null
+      },
+      "confidence": 0.8,
+      "ticket_id": "T009",
+      "customer_id": "C109",
+      "raw_text": "Hi there, I'd like to know more about your return policy. If I buy sneakers and they don't fit, can I return them? Is there a time limit?"
+    },
+    "rag": {
+      "ticket_id": "T009",
+      "query_used": "product_question Hi there, I'd like to know more about your return policy. If I buy sneakers and they don't fit, can I return them? Is there a time limit?",
+      "retrieved_chunks": [
+        {
+          "source": "returns_policy.md",
+          "text": "# Stryde Returns Policy\n\nAt Stryde, we want every customer to feel confident about their purchase. That is why we offer a generous 30-day return window from the date of delivery. If your sneakers, app",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "returns_policy.md",
+          "text": "There are a few exceptions to our return policy. Items purchased during clearance sales or marked as \"Final Sale\" cannot be returned or exchanged. Intimates, socks, and customised or personalised prod",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "refund_process.md",
+          "text": "Once your returned item reaches our warehouse, our quality team inspects it within 24 hours to confirm that it meets our return conditions. After the inspection is complete and approved, the refund is",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "According to our return policy, you can initiate a return if the sneakers don't meet your expectations for any reason. The good news is that we have a 30-day return window from the date of delivery, so as long as it's within that timeframe, you're eligible to return them.\n\nJust keep in mind that items purchased during clearance sales or marked as \"Final Sale\" cannot be returned or exchanged, but your sneakers should be fine."
+    },
+    "outcome": {
+      "ticket_id": "T009",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Hi C109,\n\nThank you for reaching out to us about our return policy! I'm happy to let you know that we have a 30-day return window from the date of delivery, so if your sneakers don't fit or meet your expectations, you can initiate a return within this timeframe. Please note that items purchased during clearance sales or marked as \"Final Sale\" are excluded from returns and exchanges, but it sounds like your purchase should be eligible for a return. If you'd like to proceed with the return process, I'll be happy to guide you through the next steps.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "returns_policy.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "product_question",
+      "urgency": "low",
+      "sentiment": "neutral",
+      "entities": {
+        "product_name": null,
+        "days_mentioned": null,
+        "order_id": null
+      },
+      "confidence": 0.8,
+      "ticket_id": "T010",
+      "customer_id": "C110",
+      "raw_text": "What payment methods do you accept? I want to use UPI but also wondering if you have any EMI options for expensive orders."
+    },
+    "rag": {
+      "ticket_id": "T010",
+      "query_used": "product_question What payment methods do you accept? I want to use UPI but also wondering if you have any EMI options for expensive orders.",
+      "retrieved_chunks": [
+        {
+          "source": "payment_methods.md",
+          "text": "UPI is our most popular payment method and for good reason. We accept payments through all major UPI apps including Google Pay, PhonePe, Paytm, and BHIM. UPI transactions are instant, and as mentioned",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "payment_methods.md",
+          "text": "above ₹2000 through select bank credit cards. EMI tenures of 3, 6, and 9 months are supported, with no-cost EMI available on select products during promotional periods.",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "payment_methods.md",
+          "text": "# Stryde Payment Methods\n\nAt Stryde, we offer a wide range of payment options to make your checkout experience as seamless as possible. Whether you prefer digital wallets, card payments, or flexible p",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "We accept UPI payments through all major UPI apps including Google Pay, PhonePe, Paytm, and BHIM. As for EMI options, we support them for orders above ₹2000 through select bank credit cards with tenures of 3, 6, and 9 months available."
+    },
+    "outcome": {
+      "ticket_id": "T010",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Here's a helpful response to C110:\n\nDear C110,\n\nThank you for reaching out to us! We're happy to inform you that we accept UPI payments through all major UPI apps, including Google Pay, PhonePe, Paytm, and BHIM. Additionally, if your order exceeds ₹2000, you can opt for EMI options with select bank credit cards, offering tenures of 3, 6, or 9 months. Please feel free to contact us once you've placed an order, and we'll be happy to assist you with the payment process.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "payment_methods.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "refund_inquiry",
+      "urgency": "high",
+      "sentiment": "frustrated",
+      "entities": {
+        "order_id": null,
+        "product_name": null,
+        "days_mentioned": 10
+      },
+      "confidence": 0.8,
+      "ticket_id": "T011",
+      "customer_id": "C111",
+      "raw_text": "I returned a pair of sneakers 10 days ago and still haven't received my refund. The return was picked up by Delhivery and I have the receipt. When will I get my money back? This is taking way too long."
+    },
+    "rag": {
+      "ticket_id": "T011",
+      "query_used": "refund_inquiry I returned a pair of sneakers 10 days ago and still haven't received my refund. The return was picked up by Delhivery and I have the receipt. When will I get my money back? This is taking way too long.",
+      "retrieved_chunks": [
+        {
+          "source": "refund_process.md",
+          "text": "Once your returned item reaches our warehouse, our quality team inspects it within 24 hours to confirm that it meets our return conditions. After the inspection is complete and approved, the refund is",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "refund_process.md",
+          "text": "All refunds are credited back to the original payment method used at the time of purchase. We are unable to process refunds to a different account, card, or payment method for security reasons. If the",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "returns_policy.md",
+          "text": "To be eligible for a return, items must be in their original condition — unworn, unwashed, and with all original tags attached. We ask that you return items in their original Stryde packaging, includi",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "I'd be happy to help you with your refund inquiry.\n\nAccording to our process, once the returned item reaches our warehouse, our quality team inspects it within 24 hours to confirm that it meets our return conditions. After the inspection is complete and approved, the refund is initiated immediately.\n\nHowever, the time it takes for the refund to appear in your account depends on your original payment method. We can't provide an exact timeline, but we'll look into this further.\n\nCan you please check with your bank or original payment method to see if there are any issues or delays on their end? If you're still experiencing issues, feel free to contact our support team and we'll work together to find a resolution."
+    },
+    "outcome": {
+      "ticket_id": "T011",
+      "decision": "escalate",
+      "escalation_reason": "High-urgency refund_inquiry with no order reference",
+      "order_data": null,
+      "draft_reply": "Dear C111,\n\nThank you for reaching out to us about your delayed refund. I apologize for the inconvenience this has caused and understand that it's taking longer than expected. Your case has been escalated to a senior support specialist who will contact you within 2 hours to personally review your return and expedite the refund process.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "refund_process.md",
+      "resolved": false
+    }
+  },
+  {
+    "triage": {
+      "intent": "complaint",
+      "urgency": "high",
+      "sentiment": "angry",
+      "entities": {
+        "order_id": null,
+        "product_name": null,
+        "days_mentioned": 12
+      },
+      "confidence": 0.9,
+      "ticket_id": "T012",
+      "customer_id": "C112",
+      "raw_text": "Your shipping is terrible. I've ordered from you three times and every single time the delivery is late. 12 days for what you call '5-7 business days' delivery. I'm done with Stryde honestly."
+    },
+    "rag": {
+      "ticket_id": "T012",
+      "query_used": "complaint Your shipping is terrible. I've ordered from you three times and every single time the delivery is late. 12 days for what you call '5-7 business days' delivery. I'm done with Stryde honestly.",
+      "retrieved_chunks": [
+        {
+          "source": "shipping_info.md",
+          "text": "Please note that business days exclude Sundays and public holidays. During peak sale periods such as Stryde Season Sales or festive collections, delivery times may be slightly longer due to high order",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "delivery window, please reach out to our support team at support@stryde.in or through the in-app chat and we will investigate the delay immediately with our logistics partner.",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "product_warranty.md",
+          "text": "To file a warranty claim, email warranty@stryde.in with your order number, date of purchase, and clear photographs showing the defect from multiple angles. Our warranty team will review your claim wit",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "I understand your frustration, but I don't have any information about your specific orders or interactions with our shipping team. However, according to our policy, we estimate delivery times to be 5-7 business days, and during peak sale periods, delivery times may be slightly longer due to high order volumes. If you're concerned about the delay in your order, I can suggest reaching out to our support team at support@stryde.in or through the in-app chat, so they can investigate the issue with our logistics partner and provide a more accurate update on the status of your order."
+    },
+    "outcome": {
+      "ticket_id": "T012",
+      "decision": "escalate",
+      "escalation_reason": "High urgency + angry sentiment, human required",
+      "order_data": null,
+      "draft_reply": "Dear C112,\n\nI want to start by apologizing for the frustrating experience you've had with your Stryde orders. I understand that receiving late deliveries can be disappointing and frustrating, especially when we promise a faster delivery time. Your case has been escalated to one of our senior support specialists who will personally review your situation and contact you within the next 2 hours to discuss possible solutions.\n\nBest regards,\nStryde Support Team",
+      "kb_context_used": "shipping_info.md",
+      "resolved": false
+    }
+  },
+  {
+    "triage": {
+      "intent": "product_question",
+      "urgency": "low",
+      "sentiment": "neutral",
+      "entities": {
+        "product_name": null,
+        "order_id": null,
+        "days_mentioned": null
+      },
+      "confidence": 0.9,
+      "ticket_id": "T013",
+      "customer_id": "C113",
+      "raw_text": "Hello, I was wondering about the Stryde Rewards program. How do I earn points and what can I redeem them for? Also do points expire?"
+    },
+    "rag": {
+      "ticket_id": "T013",
+      "query_used": "product_question Hello, I was wondering about the Stryde Rewards program. How do I earn points and what can I redeem them for? Also do points expire?",
+      "retrieved_chunks": [
+        {
+          "source": "loyalty_program.md",
+          "text": "Please note that Stryde Reward points expire after 12 months of account inactivity. Inactivity means no purchases, no point redemptions, and no engagement with the Stryde app or website during that pe",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "loyalty_program.md",
+          "text": "# Stryde Rewards Loyalty Program\n\nStryde Rewards is our way of thanking our loyal customers for choosing us. Every purchase you make earns you reward points that can be redeemed for discounts on futur",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "loyalty_program.md",
+          "text": "When it comes to redeeming your points, every 100 Stryde Reward points equals a ₹10 discount on your next order. You can choose to apply your points at checkout, either partially or in full, depending",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "According to the Stryde Rewards Loyalty Program information:\n\n* You earn reward points with every purchase you make.\n* Every 100 Stryde Reward points equals a ₹10 discount on your next order. You can apply your points at checkout, either partially or in full, depending on your balance.\n* Points can be combined with sale prices and promotional discounts.\n\nAs for point expiration, it's mentioned that Stryde Reward points expire after 12 months of account inactivity. To keep your points active, you need to make a purchase or redeem points at least once every 12 months."
+    },
+    "outcome": {
+      "ticket_id": "T013",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Dear C113,\n\nThank you for reaching out to us about our Stryde Rewards program! To earn points, simply make a purchase on our website or in-store - every transaction earns you reward points that can be redeemed later. With 100 points, you'll get ₹10 off your next order, and you can combine points with sale prices and promotions for even more savings. Points do expire after 12 months of account inactivity, but don't worry - making a purchase or redeeming points every year will keep them active.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "loyalty_program.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "return_request",
+      "urgency": "high",
+      "sentiment": "frustrated",
+      "entities": {
+        "product_name": "Stryde Urban Black sneakers",
+        "order_id": null,
+        "days_mentioned": null
+      },
+      "confidence": 0.95,
+      "ticket_id": "T014",
+      "customer_id": "C114",
+      "raw_text": "I received the wrong item in my order. I ordered the Stryde Urban Black sneakers but got some white running shoes instead. I'm very annoyed because this was supposed to be a gift. I don't even have an order number handy right now."
+    },
+    "rag": {
+      "ticket_id": "T014",
+      "query_used": "return_request I received the wrong item in my order. I ordered the Stryde Urban Black sneakers but got some white running shoes instead. I'm very annoyed because this was supposed to be a gift. I don't even have an order number handy right now.",
+      "retrieved_chunks": [
+        {
+          "source": "returns_policy.md",
+          "text": "To be eligible for a return, items must be in their original condition — unworn, unwashed, and with all original tags attached. We ask that you return items in their original Stryde packaging, includi",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "size_guide.md",
+          "text": "# Stryde Size Guide\n\nFinding the right fit is essential for comfort and performance, and at Stryde we want to help you pick the perfect size every time. Our sneakers are designed using Indian sizing s",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "escalation_contacts.md",
+          "text": "To help us resolve your issue as quickly as possible, please have the following information ready when contacting our escalation team — your order number, the email address or phone number associated ",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "I'd be happy to help you with your return request.\n\nGiven that you received the wrong item, which is not in its original condition (as it's not what you ordered), we can definitely assist you with returning or exchanging the shoes.\n\nTo proceed, could you please provide me with your order number? If you don't have it handy, I can try to look up your order using your email address associated with your Stryde account. This will help us expedite the process and get a resolution for you as soon as possible.\n\nAdditionally, please confirm that you'd like to return or exchange the white running shoes for the correct item, which is the Stryde Urban Black sneakers."
+    },
+    "outcome": {
+      "ticket_id": "T014",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Here's a helpful and complete reply:\n\nDear C114,\n\nThank you for reaching out to us about the issue with your order. I'm so sorry that you received the wrong item, which was supposed to be a gift. To assist you further, could you please provide me with your email address associated with your Stryde account? This will allow me to look up your order and initiate the return or exchange process for the white running shoes for the correct item, the Stryde Urban Black sneakers.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "returns_policy.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "warranty_claim",
+      "urgency": "high",
+      "sentiment": "frustrated",
+      "entities": {
+        "order_id": null,
+        "product_name": null,
+        "days_mentioned": 4
+      },
+      "confidence": 0.9,
+      "ticket_id": "T015",
+      "customer_id": "C115",
+      "raw_text": "Do your sneakers come with any warranty? I bought a pair 4 months ago and the sole is already separating from the upper. This shouldn't happen with a premium brand."
+    },
+    "rag": {
+      "ticket_id": "T015",
+      "query_used": "warranty_claim Do your sneakers come with any warranty? I bought a pair 4 months ago and the sole is already separating from the upper. This shouldn't happen with a premium brand.",
+      "retrieved_chunks": [
+        {
+          "source": "product_warranty.md",
+          "text": "# Stryde Product Warranty\n\nEvery Stryde product is crafted with premium materials and put through rigorous quality testing before it reaches you. We stand behind the quality of our products, which is ",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "product_warranty.md",
+          "text": "Our warranty covers defects that arise from the manufacturing process. This includes sole separation or delamination where the outsole detaches from the upper without any external cause, stitching def",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "product_warranty.md",
+          "text": "jams, eyelet or lace loop detachment, and material peeling on synthetic uppers that occurs within the warranty period. If your product exhibits any of these issues, we will either repair the item, rep",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "Yes, our Stryde footwear comes with a 6-month manufacturing defect warranty from the date of purchase. Since you purchased your pair 4 months ago, it falls within this warranty period.\n\nThe issue you're experiencing with the sole separating from the upper is actually one of the defects covered under our warranty. We would be happy to assist you in resolving this issue.\n\nPlease contact us so we can discuss further and determine the best course of action for a repair or replacement, depending on stock availability and the nature of the defect."
+    },
+    "outcome": {
+      "ticket_id": "T015",
+      "decision": "escalate",
+      "escalation_reason": "High-urgency warranty_claim with no order reference",
+      "order_data": null,
+      "draft_reply": "Dear C115,\n\nThank you for reaching out to us about your concern with your Stryde sneakers. I apologize for any inconvenience this has caused and appreciate you bringing it to our attention. Your case has been escalated to a senior support specialist who will contact you within the next 2 hours to discuss the best course of action for a repair or replacement, as per our warranty policy.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "product_warranty.md",
+      "resolved": false
+    }
+  },
+  {
+    "triage": {
+      "intent": "feedback",
+      "urgency": "low",
+      "sentiment": "positive",
+      "entities": {
+        "product_name": "Stryde Flex",
+        "order_id": null,
+        "days_mentioned": null
+      },
+      "confidence": 0.95,
+      "ticket_id": "T016",
+      "customer_id": "C116",
+      "raw_text": "Hi, just wanted to say I love the new Stryde Flex collection! The comfort is amazing. Keep up the great work team!"
+    },
+    "rag": {
+      "ticket_id": "T016",
+      "query_used": "feedback Hi, just wanted to say I love the new Stryde Flex collection! The comfort is amazing. Keep up the great work team!",
+      "retrieved_chunks": [
+        {
+          "source": "returns_policy.md",
+          "text": "# Stryde Returns Policy\n\nAt Stryde, we want every customer to feel confident about their purchase. That is why we offer a generous 30-day return window from the date of delivery. If your sneakers, app",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "escalation_contacts.md",
+          "text": "To help us resolve your issue as quickly as possible, please have the following information ready when contacting our escalation team — your order number, the email address or phone number associated ",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "payment_methods.md",
+          "text": "# Stryde Payment Methods\n\nAt Stryde, we offer a wide range of payment options to make your checkout experience as seamless as possible. Whether you prefer digital wallets, card payments, or flexible p",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "Thank you for your kind words and feedback about the Stryde Flex collection! We're thrilled to hear that you're enjoying the comfort of our products. Your support means a lot to us, and we'll keep working hard to bring you the best sneaker experience possible. If you have any other thoughts or suggestions, feel free to share them with us anytime!"
+    },
+    "outcome": {
+      "ticket_id": "T016",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Here's a helpful and complete reply:\n\nDear C116,\n\nThank you for reaching out to us! We're thrilled that you're enjoying the comfort of our Stryde Flex collection - it means a lot to us that you're loving our products. As we mentioned in our knowledge base, your support is invaluable to us, and we'll continue working hard to bring you the best sneaker experience possible.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "returns_policy.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "cancellation",
+      "urgency": "high",
+      "sentiment": "frustrated",
+      "entities": {
+        "order_id": null,
+        "product_name": null,
+        "days_mentioned": null
+      },
+      "confidence": 0.95,
+      "ticket_id": "T017",
+      "customer_id": "C117",
+      "raw_text": "I need to cancel my order. I accidentally ordered two pairs instead of one. Please cancel the duplicate order as soon as possible."
+    },
+    "rag": {
+      "ticket_id": "T017",
+      "query_used": "cancellation I need to cancel my order. I accidentally ordered two pairs instead of one. Please cancel the duplicate order as soon as possible.",
+      "retrieved_chunks": [
+        {
+          "source": "returns_policy.md",
+          "text": "If you received a damaged or defective item, please contact us within 48 hours of delivery with photographs, and we will arrange an immediate replacement at no additional cost.",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "refund_process.md",
+          "text": "All refunds are credited back to the original payment method used at the time of purchase. We are unable to process refunds to a different account, card, or payment method for security reasons. If the",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "escalation_contacts.md",
+          "text": "For customers who prefer to reach our senior team directly, you can email escalations@stryde.in with your order number, a summary of the issue, and any previous ticket or reference numbers from earlie",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "I'd be happy to help with cancelling your duplicate order.\n\nTo process the cancellation, could you please provide me with your order number? This will allow us to locate your order and take immediate action on cancelling the duplicate pair. \n\nAdditionally, if you have any other details or concerns regarding this issue, feel free to share them with me so I can assist you further."
+    },
+    "outcome": {
+      "ticket_id": "T017",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Here's a helpful and complete reply:\n\nDear C117,\n\nThank you for reaching out to us about cancelling your duplicate order! I'd be happy to assist with this issue. To process the cancellation, could you please provide me with your order number so that we can locate your order and take immediate action on cancelling the duplicate pair? This will ensure a smooth resolution to your concern.\n\nBest regards,\n[Your Name]\nStryde Customer Support",
+      "kb_context_used": "returns_policy.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "order_status",
+      "urgency": "medium",
+      "sentiment": "neutral",
+      "entities": {
+        "product_name": "sneakers",
+        "days_mentioned": 5,
+        "order_id": null
+      },
+      "confidence": 0.8,
+      "ticket_id": "T018",
+      "customer_id": "C118",
+      "raw_text": "How long does express shipping take? I need a pair of sneakers delivered to Mumbai by this Friday. Is that possible if I order today?"
+    },
+    "rag": {
+      "ticket_id": "T018",
+      "query_used": "order_status How long does express shipping take? I need a pair of sneakers delivered to Mumbai by this Friday. Is that possible if I order today?",
+      "retrieved_chunks": [
+        {
+          "source": "shipping_info.md",
+          "text": "Our standard delivery option takes 5 to 7 business days from the date your order is confirmed and dispatched. This is our default shipping method, and it is available for all orders regardless of valu",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "Please note that business days exclude Sundays and public holidays. During peak sale periods such as Stryde Season Sales or festive collections, delivery times may be slightly longer due to high order",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "# Stryde Shipping Information\n\nWe are committed to getting your Stryde order to your doorstep as quickly and reliably as possible. Currently, we ship to all serviceable pincodes across India, covering",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "According to our shipping information, Express Delivery takes 2 to 3 business days. Since you're ordering from Mumbai and want delivery by this Friday, let's calculate the timeline.\n\nIf you order today (Monday), the earliest your order can be delivered is Wednesday or Thursday, which doesn't meet your deadline. However, if you place your order today and select Express Delivery, there's a chance that it might arrive on Friday, but it would depend on various factors such as our dispatch time, courier service efficiency, and any potential delays.\n\nTo confirm the delivery date, I recommend contacting our support team directly to get a more accurate estimate based on your location and current order volume. They can provide you with a better understanding of whether we can meet your deadline for Express Delivery."
+    },
+    "outcome": {
+      "ticket_id": "T018",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Here's a helpful and complete reply:\n\nDear C118,\n\nThank you for reaching out to us about your express shipping concerns! I understand that you need a pair of sneakers delivered to Mumbai by this Friday, but according to our shipping information, Express Delivery typically takes 2-3 business days. Unfortunately, if you place an order today (Monday), the earliest delivery would be Wednesday or Thursday, which doesn't meet your deadline. However, I recommend contacting our support team directly to get a more accurate estimate based on your location and current order volume.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "shipping_info.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "billing_dispute",
+      "urgency": "high",
+      "sentiment": "frustrated",
+      "entities": {
+        "order_id": "ORD-4892",
+        "product_name": null,
+        "days_mentioned": null
+      },
+      "confidence": 0.95,
+      "ticket_id": "T019",
+      "customer_id": "C119",
+      "raw_text": "I was charged ₹2999 twice on my UPI for order ORD-4892. One payment went through but the second one also got debited. Please refund the duplicate charge immediately."
+    },
+    "rag": {
+      "ticket_id": "T019",
+      "query_used": "billing_dispute I was charged ₹2999 twice on my UPI for order ORD-4892. One payment went through but the second one also got debited. Please refund the duplicate charge immediately.",
+      "retrieved_chunks": [
+        {
+          "source": "refund_process.md",
+          "text": "All refunds are credited back to the original payment method used at the time of purchase. We are unable to process refunds to a different account, card, or payment method for security reasons. If the",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "payment_methods.md",
+          "text": "UPI is our most popular payment method and for good reason. We accept payments through all major UPI apps including Google Pay, PhonePe, Paytm, and BHIM. UPI transactions are instant, and as mentioned",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "returns_policy.md",
+          "text": "When processing your return, you will have the option to choose between a full refund to your original payment method or Stryde Store Credit. Store credit is issued instantly upon return approval and ",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "We are unable to process refunds to a different account, card, or payment method for security reasons. However, since you used UPI as your original payment method, we can assist with an alternative resolution.\n\nTo resolve this issue, please contact our support team and we will work with you to find a solution. This may include issuing store credit instead of a refund, which would be credited back to your UPI account instantly upon approval."
+    },
+    "outcome": {
+      "ticket_id": "T019",
+      "decision": "escalate",
+      "escalation_reason": "Order ID does not belong to ticket customer (possible fraud or typo)",
+      "order_data": {
+        "carrier": "BlueDart",
+        "customer_id": "C101",
+        "days_since_order": 17,
+        "estimated_delivery": "2026-04-17",
+        "items": [
+          {
+            "colour": "Midnight Black",
+            "product": "Stryde Runner Pro",
+            "size": "UK 9"
+          }
+        ],
+        "order_date": "2026-04-10",
+        "order_id": "ORD-4892",
+        "status": "in_transit",
+        "tracking_number": "BD789456123"
+      },
+      "draft_reply": "\"Hello C119, thank you for reaching out about your concern with order ORD-4892. I've checked on the status of your order and it's currently in transit with our carrier BlueDart. Please note that we can't process refunds to a different account or payment method due to security reasons. However, since you used UPI as your original payment method, we can assist with an alternative resolution. Can you please contact our support team so we can work together to find a solution for the duplicate charge?\"",
+      "kb_context_used": "refund_process.md",
+      "resolved": false
+    }
+  },
+  {
+    "triage": {
+      "intent": "product_question",
+      "urgency": "low",
+      "sentiment": "neutral",
+      "entities": {
+        "product_name": "Stryde Runner and Stryde Runner Pro",
+        "order_id": null,
+        "days_mentioned": null
+      },
+      "confidence": 0.87,
+      "ticket_id": "T020",
+      "customer_id": "C120",
+      "raw_text": "What's the difference between the Stryde Runner and the Stryde Runner Pro? Is the Pro worth the extra ₹1500? I mainly use them for daily jogging."
+    },
+    "rag": {
+      "ticket_id": "T020",
+      "query_used": "product_question What's the difference between the Stryde Runner and the Stryde Runner Pro? Is the Pro worth the extra ₹1500? I mainly use them for daily jogging.",
+      "retrieved_chunks": [
+        {
+          "source": "size_guide.md",
+          "text": "If you find yourself between two sizes, our recommendation depends on the type of sneaker you are purchasing. For running shoes like the Stryde Runner and Runner Pro, we suggest sizing up by half a si",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "loyalty_program.md",
+          "text": "# Stryde Rewards Loyalty Program\n\nStryde Rewards is our way of thanking our loyal customers for choosing us. Every purchase you make earns you reward points that can be redeemed for discounts on futur",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "product_warranty.md",
+          "text": "# Stryde Product Warranty\n\nEvery Stryde product is crafted with premium materials and put through rigorous quality testing before it reaches you. We stand behind the quality of our products, which is ",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "I don't have specific information on the differences between the Stryde Runner and the Stryde Runner Pro, such as their features, materials, or performance enhancements. However, based on general knowledge of running shoes, it's common for \"Pro\" models to offer advanced features, improved durability, or enhanced performance compared to standard models.\n\nConsidering you mainly use them for daily jogging, if the Stryde Runner Pro offers significant improvements that align with your needs and preferences, then the extra ₹1500 might be worth it. However, without specific details on what sets the Pro apart from the standard model, I can't provide a definitive answer to whether the extra cost is justified.\n\nIt's recommended to check the official Stryde website or consult with customer support for more information on the differences between these two models and their suitability for your jogging needs."
+    },
+    "outcome": {
+      "ticket_id": "T020",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Here's a helpful and complete reply to resolve C120's concern:\n\nDear C120,\n\nThank you for reaching out to us about the difference between our Stryde Runner and Stryde Runner Pro models. As a jogger, you may be interested to know that \"Pro\" models often come with advanced features or improved performance compared to standard models. While I don't have specific details on what sets the Stryde Runner Pro apart from the standard model, I recommend checking our official website for more information on their differences and suitability for your jogging needs.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "size_guide.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "return_request",
+      "urgency": "low",
+      "sentiment": "neutral",
+      "entities": {
+        "order_id": null,
+        "product_name": "hoodie",
+        "days_mentioned": 7
+      },
+      "confidence": 0.8,
+      "ticket_id": "T021",
+      "customer_id": "C121",
+      "raw_text": "I want to return a hoodie I bought last week. It's too large. Can I exchange it for a medium instead of getting a refund?"
+    },
+    "rag": {
+      "ticket_id": "T021",
+      "query_used": "return_request I want to return a hoodie I bought last week. It's too large. Can I exchange it for a medium instead of getting a refund?",
+      "retrieved_chunks": [
+        {
+          "source": "returns_policy.md",
+          "text": "To be eligible for a return, items must be in their original condition — unworn, unwashed, and with all original tags attached. We ask that you return items in their original Stryde packaging, includi",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "returns_policy.md",
+          "text": "There are a few exceptions to our return policy. Items purchased during clearance sales or marked as \"Final Sale\" cannot be returned or exchanged. Intimates, socks, and customised or personalised prod",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "refund_process.md",
+          "text": "All refunds are credited back to the original payment method used at the time of purchase. We are unable to process refunds to a different account, card, or payment method for security reasons. If the",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "According to the context, items purchased during clearance sales or marked as \"Final Sale\" cannot be returned or exchanged. However, there is no mention that this applies to all purchases made outside of these conditions.\n\nUnfortunately, I don't know if you can exchange it for a medium instead of getting a refund."
+    },
+    "outcome": {
+      "ticket_id": "T021",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Here's a potential response:\n\nDear C121,\n\nThank you for reaching out to us about your recent purchase! I'd be happy to help with exchanging your hoodie for a medium size. However, before we proceed, I just want to confirm that your order was not made during one of our clearance sales or marked as \"Final Sale\". If this is the case, you're eligible for an exchange within 30 days of delivery.\n\nPlease provide me with your order number so I can assist you further and guide you through the exchange process.",
+      "kb_context_used": "returns_policy.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "order_status",
+      "urgency": "high",
+      "sentiment": "frustrated",
+      "entities": {
+        "order_id": null,
+        "product_name": null,
+        "days_mentioned": 5
+      },
+      "confidence": 0.8,
+      "ticket_id": "T022",
+      "customer_id": "C122",
+      "raw_text": "My order has been showing 'processing' for 5 days now. When will it actually ship? I expected faster service from a premium brand."
+    },
+    "rag": {
+      "ticket_id": "T022",
+      "query_used": "order_status My order has been showing 'processing' for 5 days now. When will it actually ship? I expected faster service from a premium brand.",
+      "retrieved_chunks": [
+        {
+          "source": "shipping_info.md",
+          "text": "Our standard delivery option takes 5 to 7 business days from the date your order is confirmed and dispatched. This is our default shipping method, and it is available for all orders regardless of valu",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "delivery window, please reach out to our support team at support@stryde.in or through the in-app chat and we will investigate the delay immediately with our logistics partner.",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "to track your package on the carrier's website. You can also track your order in real time through the Stryde app under the \"My Orders\" section.",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "I understand your concern about the processing status of your order. According to our standard delivery option, orders are typically dispatched within 5-7 business days after confirmation. Since your order has been showing 'processing' for 5 days now, it's likely that your order is still in the processing stage and will be dispatched soon. However, I would recommend reaching out to our support team at support@stryde.in or through the in-app chat so they can investigate the delay with our logistics partner and provide you with a more accurate estimate of when your order will ship."
+    },
+    "outcome": {
+      "ticket_id": "T022",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Here's a helpful and complete reply:\n\nDear C122,\n\nThank you for reaching out to us about the status of your order. I understand that our standard delivery option typically dispatches orders within 5-7 business days after confirmation, but it seems like we're running a bit behind schedule in your case. I'd be happy to look into this further and provide you with an estimated shipping date. Could you please provide me with the order ID so I can investigate and update you accordingly?\n\nBest regards,\n[Your Name]\nStryde Customer Support",
+      "kb_context_used": "shipping_info.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "product_question",
+      "urgency": "low",
+      "sentiment": "neutral",
+      "entities": {
+        "order_id": null,
+        "product_name": null,
+        "days_mentioned": null
+      },
+      "confidence": 0.8,
+      "ticket_id": "T023",
+      "customer_id": "C123",
+      "raw_text": "Could you help me understand your size chart? I usually wear US 10 in Nike. What would be the equivalent Stryde size in UK sizing?"
+    },
+    "rag": {
+      "ticket_id": "T023",
+      "query_used": "product_question Could you help me understand your size chart? I usually wear US 10 in Nike. What would be the equivalent Stryde size in UK sizing?",
+      "retrieved_chunks": [
+        {
+          "source": "size_guide.md",
+          "text": "Here is how our sizes map across standards. A Stryde size 6 corresponds to UK 6 and EU 39. Size 7 maps to UK 7 and EU 40. Size 8 is UK 8 and EU 41. Size 9 is UK 9 and EU 42. Size 10 is UK 10 and EU 44",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "size_guide.md",
+          "text": "to UK 9, 28 cm to UK 10, and 29 cm to UK 11. We recommend measuring both feet, as it is common for one foot to be slightly larger — always go with the larger measurement.",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "size_guide.md",
+          "text": "Urban and Flex lines, either size should work, but most customers prefer the snug fit of the smaller size. For formal sneakers and boots, we recommend staying true to your measured size for a clean, f",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "According to our size chart, since you're familiar with US sizing and we run approximately one size smaller than US standards, a US 10 would typically correspond to a Stryde size that is one size smaller.\n\nSo, based on this information, your equivalent Stryde size in UK sizing would be a UK 9."
+    },
+    "outcome": {
+      "ticket_id": "T023",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "\"Hello C123! Thank you for reaching out to us. Our size chart indicates that we run approximately one size smaller than US standards, so if you usually wear a US 10 in Nike, your equivalent Stryde size would be a UK 9. Please feel free to contact us if you have any further questions or concerns about sizing.\"",
+      "kb_context_used": "size_guide.md",
+      "resolved": true
+    }
+  },
+  {
+    "triage": {
+      "intent": "refund_inquiry",
+      "urgency": "high",
+      "sentiment": "angry",
+      "entities": {
+        "order_id": null,
+        "product_name": null,
+        "days_mentioned": 3
+      },
+      "confidence": 0.9,
+      "ticket_id": "T024",
+      "customer_id": "C124",
+      "raw_text": "I'm so angry right now. I've been waiting for my refund for THREE WEEKS. Every time I contact support I get the same copy-paste response. This is the worst customer service I've ever experienced. I want to speak to a manager RIGHT NOW."
+    },
+    "rag": {
+      "ticket_id": "T024",
+      "query_used": "refund_inquiry I'm so angry right now. I've been waiting for my refund for THREE WEEKS. Every time I contact support I get the same copy-paste response. This is the worst customer service I've ever experienced. I want to speak to a manager RIGHT NOW.",
+      "retrieved_chunks": [
+        {
+          "source": "refund_process.md",
+          "text": "All refunds are credited back to the original payment method used at the time of purchase. We are unable to process refunds to a different account, card, or payment method for security reasons. If the",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "refund_process.md",
+          "text": "Once your returned item reaches our warehouse, our quality team inspects it within 24 hours to confirm that it meets our return conditions. After the inspection is complete and approved, the refund is",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "refund_process.md",
+          "text": "# Stryde Refund Process\n\nWe understand that a smooth refund experience is just as important as a great purchase experience. At Stryde, we aim to process all refunds as quickly as possible, so you are ",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "I can't assist with that request. If you'd like, I can help you draft an email or provide information on how to escalate your issue further."
+    },
+    "outcome": {
+      "ticket_id": "T024",
+      "decision": "escalate",
+      "escalation_reason": "High urgency + angry sentiment, human required",
+      "order_data": null,
+      "draft_reply": "Dear C124,\n\nI want to start by apologizing for the frustration and delay you've experienced with your refund. I understand that waiting three weeks is unacceptable, and I'm truly sorry for the inconvenience this has caused. Your case has been escalated to a senior support specialist who will reach out to you within the next 2 hours to personally address your concerns and provide a resolution.\n\nSincerely,\n[Your Name]\nSenior Support Specialist\nStryde Customer Support",
+      "kb_context_used": "refund_process.md",
+      "resolved": false
+    }
+  },
+  {
+    "triage": {
+      "intent": "product_question",
+      "urgency": "low",
+      "sentiment": "neutral",
+      "entities": {
+        "order_id": null,
+        "product_name": null,
+        "days_mentioned": null
+      },
+      "confidence": 0.9,
+      "ticket_id": "T025",
+      "customer_id": "C125",
+      "raw_text": "Hi, do you ship to Andaman and Nicobar Islands? I saw on the website that you deliver to all Indian pincodes but I want to confirm before ordering."
+    },
+    "rag": {
+      "ticket_id": "T025",
+      "query_used": "product_question Hi, do you ship to Andaman and Nicobar Islands? I saw on the website that you deliver to all Indian pincodes but I want to confirm before ordering.",
+      "retrieved_chunks": [
+        {
+          "source": "shipping_info.md",
+          "text": "# Stryde Shipping Information\n\nWe are committed to getting your Stryde order to your doorstep as quickly and reliably as possible. Currently, we ship to all serviceable pincodes across India, covering",
+          "relevance_score": 0.85
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "We work with trusted logistics partners including FedEx, BlueDart, Delhivery, and Ecom Express. Your carrier is assigned automatically based on your delivery pincode to ensure the fastest and most rel",
+          "relevance_score": 0.8
+        },
+        {
+          "source": "shipping_info.md",
+          "text": "Our standard delivery option takes 5 to 7 business days from the date your order is confirmed and dispatched. This is our default shipping method, and it is available for all orders regardless of valu",
+          "relevance_score": 0.75
+        }
+      ],
+      "grounded_answer": "According to our shipping information, we currently ship to \"all serviceable pincodes across India\", but it doesn't specifically mention Andaman and Nicobar Islands. However, since they are part of India, it's likely that we do deliver there. If you're still unsure, I would recommend contacting our customer support directly for a more specific confirmation before placing your order."
+    },
+    "outcome": {
+      "ticket_id": "T025",
+      "decision": "resolve",
+      "escalation_reason": null,
+      "order_data": null,
+      "draft_reply": "Here's a helpful and complete reply:\n\nDear C125,\n\nThank you for reaching out to us with your question about shipping to Andaman and Nicobar Islands! While our website mentions that we deliver to all Indian pincodes, I'd like to confirm that we do indeed ship to this region. As part of India, it's likely that we can deliver to the islands, but if you're still unsure, please feel free to place your order and we'll be happy to assist with any further clarification.\n\nBest regards,\nStryde Customer Support",
+      "kb_context_used": "shipping_info.md",
       "resolved": true
     }
   }

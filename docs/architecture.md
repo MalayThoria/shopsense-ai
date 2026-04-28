@@ -3,6 +3,11 @@
 ## System diagram
 
 ```
+# ShopSense AI — Architecture
+
+## System diagram
+
+```
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                         SHOPSENSE AI — HOW IT WORKS                          ║
 ║              From customer ticket to resolved/escalated reply                ║
@@ -36,8 +41,9 @@
   │   "What is the customer asking? How urgent? How angry?"                │
   │                                                                        │
   │     ┌────────────────────────────────────────────────────┐             │
-  │     │  llama3.1 (running locally via Ollama)            │             │
-  │     │  Reads the message and returns structured JSON:   │             │
+  │     │  llama3.1 (running locally via Ollama)             │             │
+  │     │  format="json", temperature=0 (deterministic)      │             │
+  │     │  Reads the message and returns structured JSON:    │             │
   │     │                                                    │             │
   │     │     intent:     shipping_delay                     │             │
   │     │     urgency:    high                               │             │
@@ -46,6 +52,13 @@
   │     │     days:       17                                 │             │
   │     │     confidence: 0.95                               │             │
   │     └────────────────────────────────────────────────────┘             │
+  │                                                                        │
+  │   10 intent classes: order_status, return_request, refund_inquiry,      │
+  │   product_question, complaint, shipping_delay, cancellation,           │
+  │   warranty_claim, billing_dispute, feedback                            │
+  │                                                                        │
+  │   Safety net: If JSON parsing fails → retry with stricter prompt       │
+  │               If still fails → safe fallback (never crashes)           │
   │                                                                        │
   └────────────────────────────────┬───────────────────────────────────────┘
                                    │
@@ -65,15 +78,17 @@
   │   │                      │         │                            │      │
   │   │  8 policy documents: │         │   2. Search ChromaDB       │      │
   │   │  • Returns           │ ◄───────┤      → top 3 best chunks   │      │
-  │   │  • Refunds           │         │                            │      │
-  │   │  • Shipping          │         │   3. Send chunks + query   │      │
-  │   │  • Warranty          │         │      to llama3.1           │      │
-  │   │  • Payments          │         │                            │      │
-  │   │  • Loyalty           │         │   4. Get grounded answer   │      │
-  │   │  • Sizes             │         │      based ONLY on policy  │      │
-  │   │  • Escalations       │         └────────────┬───────────────┘      │
-  │   └──────────────────────┘                      │                      │
-  │                                                  │                      │
+  │   │  • Refunds           │         │      (MMR for diversity)   │      │
+  │   │  • Shipping          │         │      (MiniLM-L6-v2 embeds) │      │
+  │   │  • Warranty          │         │                            │      │
+  │   │  • Payments          │         │   3. Send chunks + query   │      │
+  │   │  • Loyalty           │         │      to llama3.1           │      │
+  │   │  • Sizes             │         │      via RetrievalQA chain │      │
+  │   │  • Escalations       │         │                            │      │
+  │   └──────────────────────┘         │   4. Get grounded answer   │      │
+  │                                    │      based ONLY on policy  │      │
+  │                                    └────────────┬───────────────┘      │
+  │                                                 │                      │
   │   Output:  grounded_answer + which policy was used                     │
   │                                                                        │
   └────────────────────────────────┬───────────────────────────────────────┘
@@ -82,14 +97,14 @@
 
   ┌────────────────────────────────────────────────────────────────────────┐
   │                                                                        │
-  │   PHASE 3 — DECIDE & REPLY                                             │
-  │   ─────────────────────────                                            │
+  │   PHASE 3 — DECIDE & REPLY (Real LangChain Agent)                      │
+  │   ──────────────────────────────────────────────                       │
   │                                                                        │
   │   "Look up the order, decide resolve vs escalate, write reply"         │
   │                                                                        │
   │                                                                        │
-  │   STEP 3A — LOOK UP THE ORDER                                          │
-  │   ───────────────────────────                                          │
+  │   STEP 3A — DETERMINISTIC ORDER LOOKUP & ESCALATION CHECK              │
+  │   ────────────────────────────────────────────────────────             │
   │                                                                        │
   │     order_id: ORD-4892                                                 │
   │           │                                                            │
@@ -98,33 +113,60 @@
   │     │  Flask API (port 5050)  │                                        │
   │     │  Reads orders.json      │                                        │
   │     │                         │                                        │
-  │     │  Returns:               │                                        │
+  │     │  Returns JSON:          │                                        │
   │     │   status: in_transit    │                                        │
   │     │   days: 17              │                                        │
   │     └────────────┬────────────┘                                        │
   │                  │                                                     │
   │                  ▼                                                     │
-  │                                                                        │
-  │   STEP 3B — CHECK ESCALATION RULES (NOT decided by LLM!)               │
-  │   ───────────────────────────────────────────────────────              │
-  │                                                                        │
   │     ┌─────────────────────────────────────────────────┐                │
-  │     │  IF any of these → ESCALATE to human agent:    │                │
+  │     │  Ownership check: does order belong to this     │                │
+  │     │  customer? If not → escalate immediately        │                │
+  │     └────────────────────────┬────────────────────────┘                │
+  │                              │                                         │
+  │                              ▼                                         │
+  │     ┌─────────────────────────────────────────────────┐                │
+  │     │  should_escalate()  — RULES, not LLM            │                │
   │     │                                                 │                │
-  │     │   Rule 1: Order ID not found in system          │                │
-  │     │   Rule 2: Days since order > 14                 │ ← MATCHES!     │
-  │     │   Rule 3: Status is "lost_in_transit"           │   (17 days)    │
-  │     │   Rule 4: High urgency AND angry sentiment      │                │
-  │     │   Rule 5: Complaint with no order ID            │                │
+  │     │   1. API failure or order not found              │                │
+  │     │   2. Status is "lost_in_transit"                │                │
+  │     │   3. Days since order > 14                      │ ← MATCHES!     │
+  │     │   4. High urgency AND angry sentiment           │                │
+  │     │   5. High-stakes intent + high urgency          │                │
+  │     │      + no order ID                              │                │
   │     │                                                 │                │
-  │     │  ELSE → RESOLVE automatically                   │                │
-  │     └─────────────────────────────────────────────────┘                │
+  │     │   → Decision: ESCALATE / RESOLVE                │                │
+  │     └────────────────────────┬────────────────────────┘                │
+  │                              │                                         │
+  │                              ▼                                         │
   │                                                                        │
+  │   STEP 3B — REACT AGENT DRAFTS THE REPLY                               │
+  │   ───────────────────────────────────────                              │
   │                                                                        │
-  │   STEP 3C — DRAFT A REPLY (LLM, grounded in Phase 2's policy)          │
-  │   ────────────────────────────────────────────────────────             │
-  │                                                                        │
-  │     "Dear customer, sorry for the delay on ORD-4892.                   │
+  │     ┌──────────────────────────────────────────────────┐               │
+  │     │  LangChain AgentExecutor                         │               │
+  │     │  + create_react_agent()                          │               │
+  │     │  + ChatOllama (llama3.1, temp=0.2)               │               │
+  │     │                                                  │               │
+  │     │  Tools available:                                │               │
+  │     │    • @tool order_lookup(order_id)                │               │
+  │     │                                                  │               │
+  │     │  ReAct reasoning loop:                           │               │
+  │     │    Thought → Action → Observation → ...          │               │
+  │     │    (max 5 iterations)                            │               │
+  │     │                                                  │               │
+  │     │  Context injected into prompt:                   │               │
+  │     │    • KB grounded answer (from Phase 2)           │               │
+  │     │    • Order data                                  │               │
+  │     │    • Customer ID                                 │               │
+  │     │    • Decision (resolve/escalate)                 │               │
+  │     │    • Escalation reason (if any)                  │               │
+  │     │                                                  │               │
+  │     │  Fallback: direct LLM call if agent fails        │               │
+  │     └────────────────────┬─────────────────────────────┘               │
+  │                          │                                             │
+  │                          ▼                                             │
+  │     "Dear C101, sorry for the delay on ORD-4892.                       │
   │      Your case has been escalated to our senior team                   │
   │      and someone will contact you within 2 hours..."                   │
   │                                                                        │
@@ -139,7 +181,7 @@
        │  decision:           ESCALATE        │
        │  escalation_reason:  17-day delay    │
        │  order_data:         {…}             │
-       │  draft_reply:        "Dear..."       │
+       │  draft_reply:        "Dear C101..."  │
        │  kb_source:          shipping.md     │
        │  resolved:           false           │
        └──────────────────────────────────────┘
@@ -157,12 +199,14 @@
 ║                                                                              ║
 ║  Phase 1 = "What did they say?"     →  CLASSIFY the ticket                  ║
 ║  Phase 2 = "What's our policy?"     →  RETRIEVE grounded knowledge          ║
-║  Phase 3 = "What should we do?"     →  DECIDE & DRAFT a reply               ║
+║  Phase 3 = "What should we do?"     →  DECIDE (rules) + DRAFT (agent)       ║
 ║                                                                              ║
 ║  The LLM does the "soft" work: understanding, retrieving, writing.           ║
 ║  The RULES do the "hard" work: deciding when a human must intervene.         ║
-║  This makes the system both intelligent AND auditable.                       ║
+║  A LangChain ReAct agent handles the reply drafting with tool access.        ║
+║  This makes the system intelligent, agentic, AND auditable.                  ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
+```
 ```
 
 ## Data flow per ticket

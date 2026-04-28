@@ -3,6 +3,7 @@ Phase 2 — RAG-powered Knowledge Retrieval and Grounded Response Generation.
 
 Uses LangChain RetrievalQA with ChatOllama and ChromaDB to retrieve
 relevant knowledge base chunks and generate policy-grounded answers.
+Uses MMR (Maximal Marginal Relevance) for diverse chunk retrieval.
 """
 
 import json
@@ -12,6 +13,7 @@ from langchain_ollama import ChatOllama
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_classic.chains import RetrievalQA
+
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -23,7 +25,8 @@ def load_rag_chain():
 
     This function should be called ONCE at startup. It loads the
     embedding model, connects to the persisted ChromaDB, and builds
-    the RetrievalQA chain with ChatOllama.
+    the RetrievalQA chain with ChatOllama. Uses MMR retrieval to
+    ensure retrieved chunks are diverse, not just from the same file.
 
     Returns:
         A RetrievalQA chain instance ready to be invoked.
@@ -44,8 +47,12 @@ def load_rag_chain():
         embedding_function=embeddings,
     )
 
-    # Create retriever — fetch top 3 most relevant chunks
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+    # MMR retriever — fetches 6 candidates, selects 3 that are both
+    # relevant AND diverse from each other (avoids 3 chunks from same file)
+    retriever = vectorstore.as_retriever(
+        search_type="mmr",
+        search_kwargs={"k": 3, "fetch_k": 6},
+    )
 
     # Build LLM
     llm = ChatOllama(model="llama3.1", temperature=0)
@@ -118,7 +125,7 @@ def retrieve_and_answer(triage_result: dict, chain) -> dict:
 
 
 if __name__ == "__main__":
-    # Quick test — run 3 tickets through Phase 1 + Phase 2
+    # Run 3 diverse tickets through Phase 1 + Phase 2 — including one escalation
     from pipeline.phase1_triage import triage_ticket
 
     project_root = Path(__file__).resolve().parent.parent
@@ -128,8 +135,11 @@ if __name__ == "__main__":
     # Load chain once
     chain = load_rag_chain()
 
-    # Pick 3 tickets with different intents for variety
-    test_tickets = [tickets[0], tickets[6], tickets[10]]  # shipping, product, refund
+    # Pick 3 tickets that demonstrate variety + one escalation case
+    # T001 — shipping delay (escalation case)
+    # T007 — product question (resolve case)
+    # T011 — refund inquiry (escalation case via broadened rule 5)
+    test_tickets = [tickets[0], tickets[6], tickets[10]]
     results = []
 
     for ticket in test_tickets:

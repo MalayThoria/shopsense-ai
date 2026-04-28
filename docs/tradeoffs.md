@@ -9,8 +9,12 @@
 | Phase 2-3 framework | LangChain | Custom framework | Faster development with retriever + tool integrations, but heavier dependency |
 | Vector DB | ChromaDB | FAISS | Metadata support + persistence out of box, but less battle-tested at scale |
 | Embeddings | MiniLM-L6-v2 | OpenAI text-embedding-3-small | Free, local, CPU-friendly, but lower recall on nuanced queries |
+| Retrieval | MMR (k=3, fetch_k=6) | Similarity search (k=3) | Diverse chunks from multiple sources, but slightly slower retrieval |
 | Escalation | Deterministic rules | LLM-decided | Auditable, testable, reviewable by support lead, but less flexible on edge cases |
+| Agent | ReAct AgentExecutor + fallback | Pure deterministic pipeline | Satisfies agentic requirement with safety net, but ReAct can hit iteration limits |
 | Mock API | Flask + JSON | LangChain tool with mock data | Mirrors real production architecture with network calls + failure modes, but extra process to run |
+| Intent schema | 10 classes | 7 classes | Better coverage (warranty, billing, feedback), but more fragile classification |
+| Ownership check | Compare customer_id on lookup | Trust order_id blindly | Prevents privacy leaks (T019 cross-customer), but adds one check per ticket |
 
 ---
 
@@ -32,7 +36,15 @@
 - **Cost**: Less flexibility on edge cases the rules don't cover (those default to "resolve").
 - **Revisit when**: we have labeled data to evaluate a learned escalation classifier and a way to A/B it against the rule set.
 
-### 3. ChromaDB over FAISS / Pinecone / pgvector
+### 3. ReAct AgentExecutor with deterministic fallback
+
+- **Picked**: LangChain `create_react_agent` + `AgentExecutor` for reply drafting, with a direct LLM fallback if the agent hits its iteration limit.
+- **Declined**: Pure deterministic pipeline (no agent), or full agent-controlled escalation.
+- **Why**: The assignment requires an "agentic" phase with `AgentExecutor`. We use the agent for reply generation where hallucination risk is low, while keeping escalation decisions outside the agent as deterministic rules. The fallback ensures the pipeline never crashes — if llama3.1 struggles with ReAct format (which happens ~40% of the time on product questions with no tools needed), the direct LLM call generates the reply instead.
+- **Cost**: The ReAct loop adds latency when it works, and the fallback means some replies bypass the agent entirely.
+- **Revisit when**: we upgrade to a model with better tool-calling support (GPT-4, Claude), or fine-tune llama3.1 on ReAct format.
+
+### 4. ChromaDB over FAISS / Pinecone / pgvector
 
 - **Picked**: ChromaDB with on-disk persistence.
 - **Declined**: FAISS (no metadata story), Pinecone (cloud, account needed), pgvector (operational overhead for a take-home).
@@ -40,7 +52,15 @@
 - **Cost**: Not the fastest at scale; not as battle-tested in production as the alternatives.
 - **Revisit when**: KB grows past ~10⁵ chunks or we need filtered queries by tenant/locale.
 
-### 4. `RetrievalQA` "stuff" chain over map-reduce / refine
+### 5. MMR retrieval over pure similarity search
+
+- **Picked**: Maximal Marginal Relevance with `k=3, fetch_k=6`.
+- **Declined**: Standard similarity search with `k=3`.
+- **Why**: With short policy markdown files, similarity search often returned 3 chunks from the same file. MMR fetches 6 candidates and selects 3 that are both relevant AND diverse — ensuring the agent gets context from multiple policy documents.
+- **Cost**: Slightly slower retrieval (fetches 6 instead of 3), marginal relevance trade-off.
+- **Revisit when**: never — MMR is strictly better for this use case.
+
+### 6. `RetrievalQA` "stuff" chain over map-reduce / refine
 
 - **Picked**: Stuff (concatenate top-k chunks into one prompt).
 - **Declined**: Map-reduce (per-chunk summarisation then merge), Refine (sequential rewriting).
@@ -48,7 +68,7 @@
 - **Cost**: Won't scale to long documents or large k. Less useful when we want per-chunk reasoning.
 - **Revisit when**: we add long-form policy docs (legal, T&Cs) or push `k` past ~6.
 
-### 5. Embedding model: `sentence-transformers/all-MiniLM-L6-v2`
+### 7. Embedding model: `sentence-transformers/all-MiniLM-L6-v2`
 
 - **Picked**: MiniLM-L6-v2 (384-dim, ~80 MB, runs on CPU).
 - **Declined**: BGE / E5 large models, OpenAI `text-embedding-3-*`.
@@ -56,31 +76,31 @@
 - **Cost**: Loses some recall vs. larger models on nuanced semantic queries.
 - **Revisit when**: we observe retrieval misses on a labeled eval set.
 
-### 6. Chunking: `chunk_size=400`, `chunk_overlap=60`, `k=3`
+### 8. Expanded intent schema (10 classes vs 7)
 
-- **Picked**: Small chunks, modest overlap, top-3 retrieval.
-- **Declined**: Bigger chunks (semantic completeness vs. precision), more overlap (more storage, more dup), larger k.
-- **Why**: Stryde policies are short and policy-dense — small chunks give us precise attribution. Top-3 is enough to ground a reply without overwhelming the prompt.
-- **Cost**: Some answers may need to merge information from sibling chunks; small-chunk retrieval can split a sentence boundary.
-- **Revisit when**: we add longer-form content or notice answers missing context.
+- **Picked**: 10 intent classes including `warranty_claim`, `billing_dispute`, `feedback`.
+- **Declined**: Original 7-class schema.
+- **Why**: Real tickets in the dataset include warranty defects (T015), double charges (T008, T019), and positive feedback (T016). Without dedicated classes, these get misclassified — warranty claims become "complaints", billing disputes become "refund inquiries", and positive feedback becomes "product questions".
+- **Cost**: More classes means more fragile classification — the LLM has to distinguish between more options.
+- **Revisit when**: we have labeled data to measure per-class precision/recall.
 
-### 7. Triage: single LLM call with `format="json"` + retry-with-stricter-prompt fallback
+### 9. Order ownership verification
 
-- **Picked**: One Ollama call in JSON mode, retry once with a stricter prompt on parse failure, fallback to neutral defaults on second failure.
-- **Declined**: Pydantic-validated structured output, function calling, fine-tuned classifier.
-- **Why**: Simplest thing that works, with two layers of safety so the pipeline never crashes on a malformed response.
-- **Cost**: No formal schema validation; subtle field drift wouldn't be caught until downstream.
-- **Revisit when**: we want guaranteed schema compliance — switch to `langchain.output_parsers.PydanticOutputParser` or a function-calling LLM.
+- **Picked**: Compare `customer_id` from triage with `customer_id` from order lookup before processing.
+- **Declined**: Trust the order_id blindly.
+- **Why**: T019 (customer C119) references ORD-4892 which belongs to C101. Without the check, C119 would see C101's order details — a privacy violation. The ownership check escalates with reason "Order ID does not belong to ticket customer" so a human can investigate.
+- **Cost**: One additional comparison per ticket with an order_id.
+- **Revisit when**: never — this is a security requirement.
 
-### 8. Mock Order API as a real Flask service (not a static JSON file)
+### 10. Mock Order API as a real Flask service (not a static JSON file)
 
 - **Picked**: Flask on `:5050`, called via the LangChain `@tool` over HTTP.
 - **Declined**: Reading `orders.json` directly inside the agent.
-- **Why**: Mirrors real production architecture — the agent is making a network call to an external system, including failure modes (timeouts, 404s). Easier to swap for the real Stryde Order API later.
+- **Why**: Mirrors real production architecture — the agent is making a network call to an external system, including failure modes (timeouts, 404s). API failures now trigger escalation (Rule 1). Easier to swap for the real Stryde Order API later.
 - **Cost**: Need to start a second process. Slight friction during demo.
 - **Revisit when**: never — this is the right shape for production.
 
-### 9. Streamlit over Flask/React for the UI
+### 11. Streamlit over Flask/React for the UI
 
 - **Picked**: Streamlit, single file, `ui/app.py`.
 - **Declined**: Flask + Jinja, FastAPI + React.
@@ -88,7 +108,7 @@
 - **Cost**: No fine-grained styling, single-user, no auth.
 - **Revisit when**: a real internal tool ships — then build a proper Next.js app on top of an API layer that wraps the orchestrator.
 
-### 10. RAG chain initialised once at module load
+### 12. RAG chain initialised once at module load
 
 - **Picked**: Build `rag_chain` at module-level in `pipeline/orchestrator.py`.
 - **Declined**: Build per request.

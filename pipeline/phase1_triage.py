@@ -20,7 +20,7 @@ Analyze the customer message and return ONLY a valid JSON object with no extra t
 
 The JSON must have exactly these fields:
 {
-  "intent": one of ["order_status", "return_request", "refund_inquiry", "product_question", "complaint", "shipping_delay", "cancellation"],
+  "intent": one of ["order_status", "return_request", "refund_inquiry", "product_question", "complaint", "shipping_delay", "cancellation", "warranty_claim", "billing_dispute", "feedback"],
   "urgency": one of ["low", "medium", "high"],
   "sentiment": one of ["positive", "neutral", "frustrated", "angry"],
   "entities": {
@@ -36,12 +36,16 @@ Rules:
 - If the customer is calm and just asking a question, set urgency to "low".
 - Extract order IDs only if they match the pattern ORD-XXXX.
 - Be precise with intent classification. A customer asking "where is my order" is "order_status", not "shipping_delay". A customer complaining about repeated late deliveries is "complaint" or "shipping_delay" depending on context.
+- "warranty_claim" is for product defects like sole separation, stitching issues, or anything covered by manufacturing warranty.
+- "billing_dispute" is for double charges, wrong amounts charged, or any payment-related disputes.
+- "feedback" is for positive comments, praise, compliments, or general non-issue messages where the customer is not asking for help.
+- "product_question" is ONLY for genuine product inquiries (sizing, features, comparisons) — not praise.
 - Return ONLY the JSON object. Nothing else."""
 
 STRICT_PROMPT = """You are a JSON-only classifier. Return ONLY a valid JSON object. 
 Absolutely no text before or after the JSON. No markdown. No explanation.
 Just a single JSON object with keys: intent, urgency, sentiment, entities, confidence.
-Valid intents: order_status, return_request, refund_inquiry, product_question, complaint, shipping_delay, cancellation.
+Valid intents: order_status, return_request, refund_inquiry, product_question, complaint, shipping_delay, cancellation, warranty_claim, billing_dispute, feedback.
 Valid urgency: low, medium, high.
 Valid sentiment: positive, neutral, frustrated, angry.
 entities must have: order_id (string or null), product_name (string or null), days_mentioned (integer or null).
@@ -118,6 +122,7 @@ def _call_ollama(text: str, system_prompt: str) -> dict | None:
         response = ollama.chat(
             model="llama3.1",
             format="json",
+            options={"temperature": 0},
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": text},

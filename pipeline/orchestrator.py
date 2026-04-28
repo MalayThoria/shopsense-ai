@@ -70,17 +70,23 @@ if __name__ == "__main__":
     output_dir.mkdir(exist_ok=True)
 
     tickets = json.loads(tickets_path.read_text(encoding="utf-8"))
+    total = len(tickets)
 
-    # Process first 5 tickets
+    # Process ALL tickets end-to-end
     results = []
-    for i, ticket in enumerate(tickets[:5], 1):
+    for i, ticket in enumerate(tickets, 1):
         print(f"\n{'='*70}")
-        print(f"TICKET {i}/5 — {ticket['ticket_id']}")
+        print(f"TICKET {i}/{total} — {ticket['ticket_id']}")
         print(f"{'='*70}")
         print(f"Text: {ticket['text'][:100]}...")
 
-        result = process_ticket(ticket)
-        results.append(result)
+        try:
+            result = process_ticket(ticket)
+            results.append(result)
+        except Exception as e:
+            logger.error(f"Pipeline failed for {ticket['ticket_id']}: {e}")
+            print(f"  ERROR: {e}")
+            continue
 
         # Pretty-print summary
         t = result["triage"]
@@ -113,3 +119,10 @@ if __name__ == "__main__":
         for r in results:
             if r["outcome"]["decision"] == "escalate":
                 print(f"  {r['outcome']['ticket_id']}: {r['outcome']['escalation_reason']}")
+
+    # Intent distribution
+    from collections import Counter
+    intent_counts = Counter(r["triage"]["intent"] for r in results)
+    print("\nIntent distribution:")
+    for intent, count in intent_counts.most_common():
+        print(f"  {intent}: {count}")

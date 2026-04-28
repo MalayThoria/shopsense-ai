@@ -9,10 +9,10 @@ Built for the Forward Deployed Engineer take-home assignment.
 ## Architecture at a glance
 
 ```
-                          ┌────────────────────────────────────┐
-   Customer ticket ──►    │            Orchestrator            │
-   (UI / JSON file)       │       pipeline/orchestrator.py     │
-                          └────────────────────────────────────┘
+                          ┌────────────────────────────────────────┐
+   Customer ticket ──►    │            Orchestrator                │
+   (UI / JSON file)       │       pipeline/orchestrator.py         │
+                          └────────────────────────────────────────┘
                                           │
         ┌─────────────────────────────────┼─────────────────────────────────┐
         ▼                                 ▼                                 ▼
@@ -24,15 +24,10 @@ Built for the Forward Deployed Engineer take-home assignment.
    intent /                       grounded_answer +                         │
    urgency /                      retrieved_chunks                          ▼
    sentiment /                                                ┌─────────────────────────┐
-   entities                                                   │  Mock Order API (Flask) │
-                                                              │  localhost:5050         │
+   entities                                                   │  AgentExecutor (ReAct)   │
+                                                              │  + should_escalate()     │
+                                                              │  + order ownership check │
                                                               └─────────────────────────┘
-                                                                          │
-                                                                          ▼
-                                                          ┌──────────────────────────────┐
-                                                          │ Deterministic escalation     │
-                                                          │ rules + LLM reply drafter    │
-                                                          └──────────────────────────────┘
                                                                           │
                                                                           ▼
                                                                 Resolution packet
@@ -40,16 +35,16 @@ Built for the Forward Deployed Engineer take-home assignment.
                                                                  KB source, order data)
 ```
 
-A more detailed diagram lives in [`docs/architecture.md`](docs/architecture.md).
+A detailed diagram lives in [`docs/architecture.md`](docs/architecture.md).
 
 ---
 
 ## What it does
 
-1. **Phase 1 — Triage & Classification.** [`pipeline/phase1_triage.py`](pipeline/phase1_triage.py). LLM call to `llama3.1` (via Ollama, JSON mode) returning `intent`, `urgency`, `sentiment`, `entities` (`order_id`, `product_name`, `days_mentioned`), and a `confidence` score. Strict-prompt retry + safe fallback.
-2. **Phase 2 — RAG Knowledge Retrieval.** [`pipeline/phase2_rag.py`](pipeline/phase2_rag.py). LangChain `RetrievalQA` over a ChromaDB index of 8 Stryde policy markdown files (`returns_policy`, `refund_process`, `shipping_info`, `product_warranty`, `payment_methods`, `loyalty_program`, `size_guide`, `escalation_contacts`). Embedding model: `sentence-transformers/all-MiniLM-L6-v2`. Returns a grounded answer plus the retrieved source chunks.
-3. **Phase 3 — Agentic Decision & Action.** [`pipeline/phase3_agent.py`](pipeline/phase3_agent.py). LangChain `@tool` (`order_lookup`) hits the mock Order API. **Escalation is deterministic, never LLM-decided** — five rules trigger escalation: order not found, delayed past the 14-day SLA, marked lost-in-transit, high-urgency + angry sentiment, or a complaint with no order reference. Reply is drafted by the LLM, grounded in the Phase 2 KB context.
-4. **Orchestrator.** [`pipeline/orchestrator.py`](pipeline/orchestrator.py) wires the three phases into a single `process_ticket()` call. The RAG chain is initialised once at module-load to avoid re-loading embeddings on every ticket.
+1. **Phase 1 — Triage & Classification.** [`pipeline/phase1_triage.py`](pipeline/phase1_triage.py). LLM call to `llama3.1` (via Ollama, JSON mode, `temperature=0`) returning `intent`, `urgency`, `sentiment`, `entities` (`order_id`, `product_name`, `days_mentioned`), and a `confidence` score. 10 intent classes: `order_status`, `return_request`, `refund_inquiry`, `product_question`, `complaint`, `shipping_delay`, `cancellation`, `warranty_claim`, `billing_dispute`, `feedback`. Strict-prompt retry + safe fallback.
+2. **Phase 2 — RAG Knowledge Retrieval.** [`pipeline/phase2_rag.py`](pipeline/phase2_rag.py). LangChain `RetrievalQA` over a ChromaDB index of 8 Stryde policy markdown files. MMR retrieval (`k=3, fetch_k=6`) for diverse chunks across different sources. Embedding model: `sentence-transformers/all-MiniLM-L6-v2`. Returns a grounded answer plus the retrieved source chunks.
+3. **Phase 3 — Agentic Decision & Action.** [`pipeline/phase3_agent.py`](pipeline/phase3_agent.py). A LangChain `AgentExecutor` with `create_react_agent` handles reply drafting with access to the `order_lookup` tool. **Escalation is deterministic, never LLM-decided** — five rules trigger escalation: API failure or order not found, marked lost-in-transit, delayed past the 14-day SLA, high-urgency + angry sentiment, or a high-stakes intent with no order reference. Includes **order ownership verification** to prevent cross-customer data leaks. Falls back to a direct LLM call if the ReAct agent hits its iteration limit.
+4. **Orchestrator.** [`pipeline/orchestrator.py`](pipeline/orchestrator.py) wires the three phases into a single `process_ticket()` call. Processes all 25 tickets end-to-end. The RAG chain is initialised once at module-load to avoid re-loading embeddings on every ticket.
 
 ---
 
@@ -74,9 +69,9 @@ shopsense-ai/
 ├── ui/
 │   └── app.py                   # Streamlit demo UI
 ├── outputs/
-│   ├── triage_results.json      # Sample Phase 1 outputs (25 tickets)
+│   ├── triage_results.json      # Phase 1 outputs (25 tickets)
 │   ├── rag_examples.json        # 3 sample Phase 2 outputs
-│   └── pipeline_results.json    # 5 full end-to-end runs
+│   └── pipeline_results.json    # Full end-to-end runs (25 tickets)
 ├── docs/
 │   ├── architecture.md          # System diagram + data flow
 │   ├── cto_narrative.md         # Day 30 CTO-facing narrative
@@ -112,7 +107,7 @@ No API keys required — the project runs entirely locally.
 
 ```bash
 # 1. Clone and enter the repo
-git clone <your-repo-url> shopsense-ai
+git clone https://github.com/MalayThoria/shopsense-ai.git
 cd shopsense-ai
 
 # 2. Create a virtual environment and install dependencies
@@ -127,7 +122,7 @@ pip install -r requirements.txt
 # 3. Make sure Ollama is running and llama3.1 is pulled (see Prerequisites)
 
 # 4. Build the ChromaDB knowledge base (one time)
-python ingest/build_vectorstore.py
+python -m ingest.build_vectorstore
 ```
 
 ---
@@ -138,14 +133,14 @@ You'll need **two terminals** (three if you want the UI). Activate the venv in e
 
 **Terminal 1 — Mock Order API**
 ```bash
-python api/mock_order_api.py
+python -m api.mock_order_api
 # Serves on http://localhost:5050
 ```
 
-**Terminal 2 — Run the full pipeline (batch over sample tickets)**
+**Terminal 2 — Run the full pipeline (batch over all 25 tickets)**
 ```bash
-python pipeline/orchestrator.py
-# Processes the first 5 tickets and writes outputs/pipeline_results.json
+python -m pipeline.orchestrator
+# Processes all 25 tickets and writes outputs/pipeline_results.json
 ```
 
 **Terminal 3 (optional) — Streamlit UI**
@@ -160,29 +155,73 @@ streamlit run ui/app.py
 
 | File | How to regenerate |
 |---|---|
-| [`outputs/triage_results.json`](outputs/triage_results.json) | `python pipeline/phase1_triage.py` |
-| [`outputs/rag_examples.json`](outputs/rag_examples.json) | `python pipeline/phase2_rag.py` |
-| [`outputs/pipeline_results.json`](outputs/pipeline_results.json) | `python pipeline/orchestrator.py` |
+| `outputs/triage_results.json` | `python -m pipeline.phase1_triage` |
+| `outputs/rag_examples.json` | `python -m pipeline.phase2_rag` |
+| `outputs/pipeline_results.json` | `python -m pipeline.orchestrator` |
 
 ---
 
-## Demo flow (for a 5-minute walkthrough)
+## Sample output
 
-1. Start `mock_order_api.py` and `streamlit run ui/app.py`.
-2. Pick **"🚚 Shipping Delay (ORD-4892)"** from the dropdown — demonstrates the SLA-breach escalation path (17-day delay → escalated).
-3. Pick **"✅ Order Status Check (ORD-5021)"** — a calm, low-urgency ticket that resolves with a grounded reply.
-4. Pick **"😡 Double Charge (ORD-9999)"** — angry sentiment + missing order → escalated for human review.
-5. Open `outputs/pipeline_results.json` to show the full structured packet for each ticket.
+A single ticket processed end-to-end produces this structure:
+
+```json
+{
+  "triage": {
+    "ticket_id": "T001",
+    "customer_id": "C101",
+    "intent": "order_status",
+    "urgency": "high",
+    "sentiment": "frustrated",
+    "entities": {
+      "order_id": "ORD-4892",
+      "product_name": null,
+      "days_mentioned": 17
+    },
+    "confidence": 0.95
+  },
+  "rag": {
+    "query_used": "order_status Hi, I placed an order ORD-4892...",
+    "retrieved_chunks": [
+      {"source": "shipping_info.md", "text": "...", "relevance_score": 0.85}
+    ],
+    "grounded_answer": "..."
+  },
+  "outcome": {
+    "ticket_id": "T001",
+    "decision": "escalate",
+    "escalation_reason": "Order delayed 17 days, past 14-day SLA",
+    "order_data": {"status": "in_transit", "days_since_order": 17, "...": "..."},
+    "draft_reply": "Dear C101, ...",
+    "kb_context_used": "shipping_info.md",
+    "resolved": false
+  }
+}
+```
+
+**Pipeline summary (25 tickets):** 17 resolved, 8 escalated (32% escalation rate).
+
+Escalation reasons include: SLA breach, lost in transit, order not found, ownership mismatch, high-urgency refund/warranty with no order reference, and angry + high-urgency sentiment.
 
 ---
 
-## Stack
+## Tech Stack
 
-- **LLM**: Ollama + `llama3.1` (local, JSON mode)
-- **Embeddings**: `sentence-transformers/all-MiniLM-L6-v2`
-- **Vector store**: ChromaDB (persisted)
-- **Orchestration**: LangChain (`RetrievalQA`, `@tool`)
-- **Mock API**: Flask
-- **UI**: Streamlit
+| Component | Tool | Reason |
+|---|---|---|
+| LLM | Ollama + llama3.1 | Local, free, JSON mode for structured output |
+| Embeddings | sentence-transformers/all-MiniLM-L6-v2 | Fast, CPU-friendly, no API cost |
+| Vector store | ChromaDB | Persistent, metadata support, LangChain integration |
+| Retrieval | MMR (k=3, fetch_k=6) | Diverse chunks from multiple KB sources |
+| Agent | LangChain AgentExecutor + create_react_agent | ReAct reasoning loop with tool access |
+| Orchestration | LangChain (RetrievalQA, @tool) | Retriever + tool abstractions out of box |
+| Mock API | Flask | Mirrors real production architecture |
+| UI | Streamlit | Rapid demo UI in a single file |
 
-For the design rationale and what we'd build on Day 60, see [`docs/cto_narrative.md`](docs/cto_narrative.md). For the engineering trade-offs taken along the way, see [`docs/tradeoffs.md`](docs/tradeoffs.md).
+---
+
+## Design Decisions
+
+See [`docs/tradeoffs.md`](docs/tradeoffs.md) for the full trade-off log. Key decisions: deterministic escalation rules over LLM-decided, local-first stack over hosted APIs, ReAct agent with fallback for reply drafting, MMR retrieval for chunk diversity, order ownership verification for security, and a real Flask service for order lookup to mirror production architecture.
+
+For the Day 30 client narrative, see [`docs/cto_narrative.md`](docs/cto_narrative.md).
