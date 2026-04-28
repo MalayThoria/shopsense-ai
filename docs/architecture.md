@@ -3,11 +3,6 @@
 ## System diagram
 
 ```
-# ShopSense AI — Architecture
-
-## System diagram
-
-```
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                         SHOPSENSE AI — HOW IT WORKS                          ║
 ║              From customer ticket to resolved/escalated reply                ║
@@ -206,7 +201,6 @@
 ║  A LangChain ReAct agent handles the reply drafting with tool access.        ║
 ║  This makes the system intelligent, agentic, AND auditable.                  ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
-```
 ```
 
 ## Data flow per ticket
