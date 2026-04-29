@@ -17,43 +17,36 @@ import json
 import streamlit as st
 from pipeline.orchestrator import process_ticket
 
-# ── Page config ──────────────────────────────────────────────────────
+# ── Page config ──────────────────────────────────────────────────
 st.set_page_config(
     page_title="ShopSense AI",
     page_icon="🧠",
     layout="wide",
 )
 
-# ── Sample tickets for quick demo ────────────────────────────────────
-SAMPLE_TICKETS = {
-    "Select a sample ticket...": "",
-    "🚚 Shipping Delay (ORD-4892)": (
-        "Hi, I placed an order ORD-4892 almost 17 days ago and it still "
-        "hasn't arrived. The tracking hasn't updated in a week. This is "
-        "really frustrating — I needed these sneakers for an event this "
-        "weekend. Can someone please look into this urgently?"
-    ),
-    "✅ Order Status Check (ORD-5021)": (
-        "Hey, just checking on my order ORD-5021. It says delivered but "
-        "I want to confirm everything is good. Thanks!"
-    ),
-    "❌ Cancellation (ORD-6610)": (
-        "I want to cancel my order ORD-6610. I placed it yesterday and "
-        "I changed my mind about the colour. Please cancel it before it ships."
-    ),
-    "😡 Double Charge (ORD-9999)": (
-        "I WAS CHARGED TWICE FOR MY ORDER! I can see two transactions of "
-        "₹3299 on my credit card statement. This is absolutely ridiculous. "
-        "Fix this NOW or I'm filing a chargeback. Order number is ORD-9999."
-    ),
-    "👟 Product Question": (
-        "I'm looking at the Stryde Runner Pro on your website. Does it "
-        "come in wide fit? I have slightly wider feet and I'm between "
-        "UK 10 and UK 11. What would you recommend?"
-    ),
+# ── Load real tickets from data/tickets.json ─────────────────────
+tickets_path = project_root / "data" / "tickets.json"
+all_tickets = json.loads(tickets_path.read_text(encoding="utf-8"))
+
+# Build sample ticket options from real data (pick diverse ones)
+SAMPLE_TICKET_IDS = {
+    "Select a sample ticket...": None,
+    "🚚 Shipping Delay (T001 — ORD-4892)": "T001",
+    "✅ Order Status Check (T002 — ORD-5021)": "T002",
+    "❌ Cancellation (T003 — ORD-6610)": "T003",
+    "📦 Lost in Transit (T004 — ORD-7741)": "T004",
+    "😡 Double Charge (T008 — ORD-9999)": "T008",
+    "👟 Product Question (T007)": "T007",
+    "💳 UPI Double Charge (T019 — ORD-4892)": "T019",
+    "🔧 Warranty Claim (T015)": "T015",
+    "💬 Positive Feedback (T016)": "T016",
+    "😤 Angry Refund (T024)": "T024",
 }
 
-# ── Sidebar ──────────────────────────────────────────────────────────
+# Index tickets by ID for quick lookup
+tickets_by_id = {t["ticket_id"]: t for t in all_tickets}
+
+# ── Sidebar ──────────────────────────────────────────────────────
 with st.sidebar:
     st.title("ℹ️ About")
     st.markdown(
@@ -62,14 +55,15 @@ with st.sidebar:
 
         **Phase 1 — Triage**
         Classifies intent, urgency, sentiment, and extracts entities
-        using llama3.1 via Ollama.
+        using llama3.1 via Ollama. 10 intent classes.
 
         **Phase 2 — RAG Retrieval**
-        Searches the Stryde knowledge base (ChromaDB) and generates
-        a policy-grounded answer using LangChain.
+        Searches the Stryde knowledge base (ChromaDB) with MMR retrieval
+        and generates a policy-grounded answer using LangChain.
 
         **Phase 3 — Agent Decision**
-        Looks up order data, applies deterministic escalation rules,
+        LangChain ReAct AgentExecutor looks up order data, applies
+        deterministic escalation rules, verifies order ownership,
         and drafts a customer reply.
 
         ---
@@ -87,15 +81,19 @@ with st.sidebar:
         """
     )
 
-# ── Main panel ───────────────────────────────────────────────────────
+# ── Main panel ───────────────────────────────────────────────────
 st.title("🧠 ShopSense AI — Customer Support Intelligence")
-st.markdown("Paste a customer ticket below and run it through the full pipeline.")
+st.markdown("Select a sample ticket or paste your own, then run it through the full pipeline.")
 
 # Sample ticket dropdown
-selected_sample = st.selectbox("Load a sample ticket", options=list(SAMPLE_TICKETS.keys()))
+selected_sample = st.selectbox("Load a sample ticket", options=list(SAMPLE_TICKET_IDS.keys()))
+
+# Get the selected ticket data (if any)
+selected_ticket_id = SAMPLE_TICKET_IDS.get(selected_sample)
+selected_ticket_data = tickets_by_id.get(selected_ticket_id) if selected_ticket_id else None
 
 # Text area — pre-fill if sample selected
-default_text = SAMPLE_TICKETS.get(selected_sample, "")
+default_text = selected_ticket_data["text"] if selected_ticket_data else ""
 ticket_text = st.text_area(
     "Paste customer ticket",
     value=default_text,
@@ -109,17 +107,27 @@ channel = st.selectbox("Channel", ["email", "chat", "whatsapp"])
 # Run button
 run_clicked = st.button("🚀 Run Pipeline", type="primary", use_container_width=True)
 
-# ── Process and display ──────────────────────────────────────────────
+# ── Process and display ──────────────────────────────────────────
 if run_clicked:
     if not ticket_text.strip():
         st.error("Please enter a ticket message before running the pipeline.")
     else:
-        ticket = {
-            "ticket_id": "UI-001",
-            "customer_id": "UI-USER",
-            "channel": channel,
-            "text": ticket_text.strip(),
-        }
+        # Use real customer_id from sample data, or a default for custom text
+        if selected_ticket_data and ticket_text.strip() == selected_ticket_data["text"].strip():
+            ticket = {
+                "ticket_id": selected_ticket_data["ticket_id"],
+                "customer_id": selected_ticket_data["customer_id"],
+                "channel": selected_ticket_data.get("channel", channel),
+                "text": ticket_text.strip(),
+            }
+        else:
+            # Custom text pasted by user — no real customer_id
+            ticket = {
+                "ticket_id": "UI-001",
+                "customer_id": "UI-CUSTOM",
+                "channel": channel,
+                "text": ticket_text.strip(),
+            }
 
         with st.spinner("Running all 3 pipeline phases..."):
             try:
@@ -135,7 +143,7 @@ if run_clicked:
         st.success("Pipeline complete!")
         st.markdown("---")
 
-        # ── Phase 1 — Triage ─────────────────────────────────────────
+        # ── Phase 1 — Triage ─────────────────────────────────────
         with st.expander("📋 Phase 1 — Triage Result"):
             col1, col2, col3 = st.columns(3)
 
@@ -165,9 +173,10 @@ if run_clicked:
             with ent_col3:
                 st.write(f"Days mentioned: `{entities.get('days_mentioned', 'None')}`")
 
+            st.write(f"Customer ID: `{triage.get('customer_id', 'N/A')}`")
             st.write(f"Confidence: `{triage.get('confidence', 0)}`")
 
-        # ── Phase 2 — RAG ────────────────────────────────────────────
+        # ── Phase 2 — RAG ────────────────────────────────────────
         with st.expander("📚 Phase 2 — Knowledge Base Answer"):
             st.markdown("**Grounded Answer:**")
             st.info(rag.get("grounded_answer", "No answer generated."))
@@ -182,7 +191,7 @@ if run_clicked:
                 else:
                     st.write("No chunks retrieved.")
 
-        # ── Phase 3 — Agent Decision ─────────────────────────────────
+        # ── Phase 3 — Agent Decision ─────────────────────────────
         with st.expander("⚡ Phase 3 — Agent Decision", expanded=True):
             decision = outcome.get("decision", "unknown")
 
